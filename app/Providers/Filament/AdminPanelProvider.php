@@ -27,7 +27,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
-            ->brandName('C-BEARS')
+            ->brandName('C-BEARS | Building Assessment System')
             ->login()
             ->colors([
                 'primary' => Color::Amber,
