@@ -1,0 +1,681 @@
+fema_version,seismicity_level,building_type,assessment_level,modifier_code,modifier_category,modifier_value,is_applicable
+P154-3E,Very High,W1,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-0.90,true
+P154-3E,Very High,W1,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.60,true
+P154-3E,Very High,W1,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.70,true
+P154-3E,Very High,W1,Level 1,PRE_CODE,Pre-Code,-0.30,true
+P154-3E,Very High,W1,Level 1,POST_BENCHMARK,Post-Benchmark,1.90,true
+P154-3E,Very High,W1,Level 1,SOIL_AB,Soil,0.50,true
+P154-3E,Very High,W1,Level 1,SOIL_E_LOW_RISE,Soil,0.00,true
+P154-3E,Very High,W1,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.40,true
+P154-3E,Very High,W1A,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-0.90,true
+P154-3E,Very High,W1A,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.50,true
+P154-3E,Very High,W1A,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.70,true
+P154-3E,Very High,W1A,Level 1,PRE_CODE,Pre-Code,-0.30,true
+P154-3E,Very High,W1A,Level 1,POST_BENCHMARK,Post-Benchmark,1.90,true
+P154-3E,Very High,W1A,Level 1,SOIL_AB,Soil,0.50,true
+P154-3E,Very High,W1A,Level 1,SOIL_E_LOW_RISE,Soil,-0.20,true
+P154-3E,Very High,W1A,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.40,true
+P154-3E,Very High,W2,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-0.90,true
+P154-3E,Very High,W2,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.50,true
+P154-3E,Very High,W2,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.60,true
+P154-3E,Very High,W2,Level 1,PRE_CODE,Pre-Code,-0.30,true
+P154-3E,Very High,W2,Level 1,POST_BENCHMARK,Post-Benchmark,2.00,true
+P154-3E,Very High,W2,Level 1,SOIL_AB,Soil,0.40,true
+P154-3E,Very High,W2,Level 1,SOIL_E_LOW_RISE,Soil,-0.40,true
+P154-3E,Very High,W2,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.40,true
+P154-3E,Very High,S1,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-0.80,true
+P154-3E,Very High,S1,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.40,true
+P154-3E,Very High,S1,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.50,true
+P154-3E,Very High,S1,Level 1,PRE_CODE,Pre-Code,-0.30,true
+P154-3E,Very High,S1,Level 1,POST_BENCHMARK,Post-Benchmark,1.00,true
+P154-3E,Very High,S1,Level 1,SOIL_AB,Soil,0.30,true
+P154-3E,Very High,S1,Level 1,SOIL_E_LOW_RISE,Soil,-0.30,true
+P154-3E,Very High,S1,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.30,true
+P154-3E,Very High,S2,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-0.70,true
+P154-3E,Very High,S2,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.40,true
+P154-3E,Very High,S2,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.50,true
+P154-3E,Very High,S2,Level 1,PRE_CODE,Pre-Code,-0.20,true
+P154-3E,Very High,S2,Level 1,POST_BENCHMARK,Post-Benchmark,1.10,true
+P154-3E,Very High,S2,Level 1,SOIL_AB,Soil,0.30,true
+P154-3E,Very High,S2,Level 1,SOIL_E_LOW_RISE,Soil,-0.20,true
+P154-3E,Very High,S2,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.30,true
+P154-3E,Very High,S3,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-0.80,true
+P154-3E,Very High,S3,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.50,true
+P154-3E,Very High,S3,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.60,true
+P154-3E,Very High,S3,Level 1,PRE_CODE,Pre-Code,-0.30,true
+P154-3E,Very High,S3,Level 1,POST_BENCHMARK,Post-Benchmark,1.10,true
+P154-3E,Very High,S3,Level 1,SOIL_AB,Soil,0.40,true
+P154-3E,Very High,S3,Level 1,SOIL_E_LOW_RISE,Soil,-0.20,true
+P154-3E,Very High,S3,Level 1,SOIL_E_MID_HIGH_RISE,Soil,,false
+P154-3E,Very High,S4,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-0.70,true
+P154-3E,Very High,S4,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.40,true
+P154-3E,Very High,S4,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.40,true
+P154-3E,Very High,S4,Level 1,PRE_CODE,Pre-Code,-0.20,true
+P154-3E,Very High,S4,Level 1,POST_BENCHMARK,Post-Benchmark,1.50,true
+P154-3E,Very High,S4,Level 1,SOIL_AB,Soil,0.30,true
+P154-3E,Very High,S4,Level 1,SOIL_E_LOW_RISE,Soil,-0.20,true
+P154-3E,Very High,S4,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.30,true
+P154-3E,Very High,S5,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-0.70,true
+P154-3E,Very High,S5,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.30,true
+P154-3E,Very High,S5,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.40,true
+P154-3E,Very High,S5,Level 1,PRE_CODE,Pre-Code,-0.10,true
+P154-3E,Very High,S5,Level 1,POST_BENCHMARK,Post-Benchmark,,false
+P154-3E,Very High,S5,Level 1,SOIL_AB,Soil,0.20,true
+P154-3E,Very High,S5,Level 1,SOIL_E_LOW_RISE,Soil,-0.10,true
+P154-3E,Very High,S5,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.10,true
+P154-3E,Very High,C1,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-0.70,true
+P154-3E,Very High,C1,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.40,true
+P154-3E,Very High,C1,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.40,true
+P154-3E,Very High,C1,Level 1,PRE_CODE,Pre-Code,-0.10,true
+P154-3E,Very High,C1,Level 1,POST_BENCHMARK,Post-Benchmark,1.40,true
+P154-3E,Very High,C1,Level 1,SOIL_AB,Soil,0.20,true
+P154-3E,Very High,C1,Level 1,SOIL_E_LOW_RISE,Soil,-0.10,true
+P154-3E,Very High,C1,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.10,true
+P154-3E,Very High,C2,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-0.80,true
+P154-3E,Very High,C2,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.40,true
+P154-3E,Very High,C2,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.50,true
+P154-3E,Very High,C2,Level 1,PRE_CODE,Pre-Code,-0.20,true
+P154-3E,Very High,C2,Level 1,POST_BENCHMARK,Post-Benchmark,1.70,true
+P154-3E,Very High,C2,Level 1,SOIL_AB,Soil,0.30,true
+P154-3E,Very High,C2,Level 1,SOIL_E_LOW_RISE,Soil,-0.20,true
+P154-3E,Very High,C2,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.30,true
+P154-3E,Very High,C3,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-0.60,true
+P154-3E,Very High,C3,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.30,true
+P154-3E,Very High,C3,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.30,true
+P154-3E,Very High,C3,Level 1,PRE_CODE,Pre-Code,0.00,true
+P154-3E,Very High,C3,Level 1,POST_BENCHMARK,Post-Benchmark,,false
+P154-3E,Very High,C3,Level 1,SOIL_AB,Soil,0.10,true
+P154-3E,Very High,C3,Level 1,SOIL_E_LOW_RISE,Soil,0.00,true
+P154-3E,Very High,C3,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.10,true
+P154-3E,Very High,PC1,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-0.70,true
+P154-3E,Very High,PC1,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.40,true
+P154-3E,Very High,PC1,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.50,true
+P154-3E,Very High,PC1,Level 1,PRE_CODE,Pre-Code,-0.20,true
+P154-3E,Very High,PC1,Level 1,POST_BENCHMARK,Post-Benchmark,1.50,true
+P154-3E,Very High,PC1,Level 1,SOIL_AB,Soil,0.30,true
+P154-3E,Very High,PC1,Level 1,SOIL_E_LOW_RISE,Soil,-0.20,true
+P154-3E,Very High,PC1,Level 1,SOIL_E_MID_HIGH_RISE,Soil,,false
+P154-3E,Very High,PC2,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-0.70,true
+P154-3E,Very High,PC2,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.40,true
+P154-3E,Very High,PC2,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.40,true
+P154-3E,Very High,PC2,Level 1,PRE_CODE,Pre-Code,-0.10,true
+P154-3E,Very High,PC2,Level 1,POST_BENCHMARK,Post-Benchmark,1.70,true
+P154-3E,Very High,PC2,Level 1,SOIL_AB,Soil,0.20,true
+P154-3E,Very High,PC2,Level 1,SOIL_E_LOW_RISE,Soil,-0.10,true
+P154-3E,Very High,PC2,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.10,true
+P154-3E,Very High,RM1,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-0.70,true
+P154-3E,Very High,RM1,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.40,true
+P154-3E,Very High,RM1,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.40,true
+P154-3E,Very High,RM1,Level 1,PRE_CODE,Pre-Code,-0.20,true
+P154-3E,Very High,RM1,Level 1,POST_BENCHMARK,Post-Benchmark,1.60,true
+P154-3E,Very High,RM1,Level 1,SOIL_AB,Soil,0.30,true
+P154-3E,Very High,RM1,Level 1,SOIL_E_LOW_RISE,Soil,-0.20,true
+P154-3E,Very High,RM1,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.20,true
+P154-3E,Very High,RM2,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-0.70,true
+P154-3E,Very High,RM2,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.40,true
+P154-3E,Very High,RM2,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.40,true
+P154-3E,Very High,RM2,Level 1,PRE_CODE,Pre-Code,-0.20,true
+P154-3E,Very High,RM2,Level 1,POST_BENCHMARK,Post-Benchmark,1.60,true
+P154-3E,Very High,RM2,Level 1,SOIL_AB,Soil,0.30,true
+P154-3E,Very High,RM2,Level 1,SOIL_E_LOW_RISE,Soil,-0.20,true
+P154-3E,Very High,RM2,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.20,true
+P154-3E,Very High,URM,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-0.60,true
+P154-3E,Very High,URM,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.30,true
+P154-3E,Very High,URM,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.30,true
+P154-3E,Very High,URM,Level 1,PRE_CODE,Pre-Code,0.00,true
+P154-3E,Very High,URM,Level 1,POST_BENCHMARK,Post-Benchmark,,false
+P154-3E,Very High,URM,Level 1,SOIL_AB,Soil,0.10,true
+P154-3E,Very High,URM,Level 1,SOIL_E_LOW_RISE,Soil,0.00,true
+P154-3E,Very High,URM,Level 1,SOIL_E_MID_HIGH_RISE,Soil,0.00,true
+P154-3E,Very High,MH,Level 1,VERTICAL_SEVERE,Vertical Irregularity,,false
+P154-3E,Very High,MH,Level 1,VERTICAL_MODERATE,Vertical Irregularity,,false
+P154-3E,Very High,MH,Level 1,PLAN_IRREGULARITY,Plan Irregularity,,false
+P154-3E,Very High,MH,Level 1,PRE_CODE,Pre-Code,0.00,true
+P154-3E,Very High,MH,Level 1,POST_BENCHMARK,Post-Benchmark,0.50,true
+P154-3E,Very High,MH,Level 1,SOIL_AB,Soil,0.10,true
+P154-3E,Very High,MH,Level 1,SOIL_E_LOW_RISE,Soil,-0.10,true
+P154-3E,Very High,MH,Level 1,SOIL_E_MID_HIGH_RISE,Soil,,false
+P154-3E,High,W1,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.20,true
+P154-3E,High,W1,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.70,true
+P154-3E,High,W1,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-1.10,true
+P154-3E,High,W1,Level 1,PRE_CODE,Pre-Code,-1.10,true
+P154-3E,High,W1,Level 1,POST_BENCHMARK,Post-Benchmark,1.60,true
+P154-3E,High,W1,Level 1,SOIL_AB,Soil,0.10,true
+P154-3E,High,W1,Level 1,SOIL_E_LOW_RISE,Soil,0.20,true
+P154-3E,High,W1,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.30,true
+P154-3E,High,W1A,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.20,true
+P154-3E,High,W1A,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.70,true
+P154-3E,High,W1A,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-1.00,true
+P154-3E,High,W1A,Level 1,PRE_CODE,Pre-Code,-1.00,true
+P154-3E,High,W1A,Level 1,POST_BENCHMARK,Post-Benchmark,1.90,true
+P154-3E,High,W1A,Level 1,SOIL_AB,Soil,0.30,true
+P154-3E,High,W1A,Level 1,SOIL_E_LOW_RISE,Soil,0.20,true
+P154-3E,High,W1A,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.60,true
+P154-3E,High,W2,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.20,true
+P154-3E,High,W2,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.70,true
+P154-3E,High,W2,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-1.00,true
+P154-3E,High,W2,Level 1,PRE_CODE,Pre-Code,-0.90,true
+P154-3E,High,W2,Level 1,POST_BENCHMARK,Post-Benchmark,2.20,true
+P154-3E,High,W2,Level 1,SOIL_AB,Soil,0.50,true
+P154-3E,High,W2,Level 1,SOIL_E_LOW_RISE,Soil,0.10,true
+P154-3E,High,W2,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.90,true
+P154-3E,High,S1,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.00,true
+P154-3E,High,S1,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.60,true
+P154-3E,High,S1,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.80,true
+P154-3E,High,S1,Level 1,PRE_CODE,Pre-Code,-0.60,true
+P154-3E,High,S1,Level 1,POST_BENCHMARK,Post-Benchmark,1.40,true
+P154-3E,High,S1,Level 1,SOIL_AB,Soil,0.40,true
+P154-3E,High,S1,Level 1,SOIL_E_LOW_RISE,Soil,-0.20,true
+P154-3E,High,S1,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.60,true
+P154-3E,High,S2,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.00,true
+P154-3E,High,S2,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.60,true
+P154-3E,High,S2,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.70,true
+P154-3E,High,S2,Level 1,PRE_CODE,Pre-Code,-0.60,true
+P154-3E,High,S2,Level 1,POST_BENCHMARK,Post-Benchmark,1.40,true
+P154-3E,High,S2,Level 1,SOIL_AB,Soil,0.60,true
+P154-3E,High,S2,Level 1,SOIL_E_LOW_RISE,Soil,-0.40,true
+P154-3E,High,S2,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.60,true
+P154-3E,High,S3,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.10,true
+P154-3E,High,S3,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.70,true
+P154-3E,High,S3,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.90,true
+P154-3E,High,S3,Level 1,PRE_CODE,Pre-Code,-0.80,true
+P154-3E,High,S3,Level 1,POST_BENCHMARK,Post-Benchmark,1.10,true
+P154-3E,High,S3,Level 1,SOIL_AB,Soil,0.10,true
+P154-3E,High,S3,Level 1,SOIL_E_LOW_RISE,Soil,0.20,true
+P154-3E,High,S3,Level 1,SOIL_E_MID_HIGH_RISE,Soil,,false
+P154-3E,High,S4,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.00,true
+P154-3E,High,S4,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.60,true
+P154-3E,High,S4,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.70,true
+P154-3E,High,S4,Level 1,PRE_CODE,Pre-Code,-0.60,true
+P154-3E,High,S4,Level 1,POST_BENCHMARK,Post-Benchmark,1.90,true
+P154-3E,High,S4,Level 1,SOIL_AB,Soil,0.60,true
+P154-3E,High,S4,Level 1,SOIL_E_LOW_RISE,Soil,-0.10,true
+P154-3E,High,S4,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.60,true
+P154-3E,High,S5,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-0.80,true
+P154-3E,High,S5,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.50,true
+P154-3E,High,S5,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.60,true
+P154-3E,High,S5,Level 1,PRE_CODE,Pre-Code,-0.20,true
+P154-3E,High,S5,Level 1,POST_BENCHMARK,Post-Benchmark,,false
+P154-3E,High,S5,Level 1,SOIL_AB,Soil,0.50,true
+P154-3E,High,S5,Level 1,SOIL_E_LOW_RISE,Soil,-0.40,true
+P154-3E,High,S5,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.40,true
+P154-3E,High,C1,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-0.90,true
+P154-3E,High,C1,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.50,true
+P154-3E,High,C1,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.60,true
+P154-3E,High,C1,Level 1,PRE_CODE,Pre-Code,-0.40,true
+P154-3E,High,C1,Level 1,POST_BENCHMARK,Post-Benchmark,1.90,true
+P154-3E,High,C1,Level 1,SOIL_AB,Soil,0.40,true
+P154-3E,High,C1,Level 1,SOIL_E_LOW_RISE,Soil,0.00,true
+P154-3E,High,C1,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.50,true
+P154-3E,High,C2,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.00,true
+P154-3E,High,C2,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.60,true
+P154-3E,High,C2,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.80,true
+P154-3E,High,C2,Level 1,PRE_CODE,Pre-Code,-0.70,true
+P154-3E,High,C2,Level 1,POST_BENCHMARK,Post-Benchmark,2.10,true
+P154-3E,High,C2,Level 1,SOIL_AB,Soil,0.50,true
+P154-3E,High,C2,Level 1,SOIL_E_LOW_RISE,Soil,0.00,true
+P154-3E,High,C2,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.70,true
+P154-3E,High,C3,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-0.70,true
+P154-3E,High,C3,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.40,true
+P154-3E,High,C3,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.50,true
+P154-3E,High,C3,Level 1,PRE_CODE,Pre-Code,-0.10,true
+P154-3E,High,C3,Level 1,POST_BENCHMARK,Post-Benchmark,,false
+P154-3E,High,C3,Level 1,SOIL_AB,Soil,0.30,true
+P154-3E,High,C3,Level 1,SOIL_E_LOW_RISE,Soil,-0.20,true
+P154-3E,High,C3,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.30,true
+P154-3E,High,PC1,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.00,true
+P154-3E,High,PC1,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.60,true
+P154-3E,High,PC1,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.70,true
+P154-3E,High,PC1,Level 1,PRE_CODE,Pre-Code,-0.50,true
+P154-3E,High,PC1,Level 1,POST_BENCHMARK,Post-Benchmark,2.00,true
+P154-3E,High,PC1,Level 1,SOIL_AB,Soil,0.60,true
+P154-3E,High,PC1,Level 1,SOIL_E_LOW_RISE,Soil,-0.30,true
+P154-3E,High,PC1,Level 1,SOIL_E_MID_HIGH_RISE,Soil,,false
+P154-3E,High,PC2,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-0.90,true
+P154-3E,High,PC2,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.50,true
+P154-3E,High,PC2,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.60,true
+P154-3E,High,PC2,Level 1,PRE_CODE,Pre-Code,-0.30,true
+P154-3E,High,PC2,Level 1,POST_BENCHMARK,Post-Benchmark,2.40,true
+P154-3E,High,PC2,Level 1,SOIL_AB,Soil,0.40,true
+P154-3E,High,PC2,Level 1,SOIL_E_LOW_RISE,Soil,-0.10,true
+P154-3E,High,PC2,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.40,true
+P154-3E,High,RM1,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-0.90,true
+P154-3E,High,RM1,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.50,true
+P154-3E,High,RM1,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.70,true
+P154-3E,High,RM1,Level 1,PRE_CODE,Pre-Code,-0.50,true
+P154-3E,High,RM1,Level 1,POST_BENCHMARK,Post-Benchmark,2.10,true
+P154-3E,High,RM1,Level 1,SOIL_AB,Soil,0.50,true
+P154-3E,High,RM1,Level 1,SOIL_E_LOW_RISE,Soil,-0.10,true
+P154-3E,High,RM1,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.50,true
+P154-3E,High,RM2,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-0.90,true
+P154-3E,High,RM2,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.50,true
+P154-3E,High,RM2,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.70,true
+P154-3E,High,RM2,Level 1,PRE_CODE,Pre-Code,-0.50,true
+P154-3E,High,RM2,Level 1,POST_BENCHMARK,Post-Benchmark,2.10,true
+P154-3E,High,RM2,Level 1,SOIL_AB,Soil,0.50,true
+P154-3E,High,RM2,Level 1,SOIL_E_LOW_RISE,Soil,-0.10,true
+P154-3E,High,RM2,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.60,true
+P154-3E,High,URM,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-0.70,true
+P154-3E,High,URM,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.40,true
+P154-3E,High,URM,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.40,true
+P154-3E,High,URM,Level 1,PRE_CODE,Pre-Code,0.00,true
+P154-3E,High,URM,Level 1,POST_BENCHMARK,Post-Benchmark,,false
+P154-3E,High,URM,Level 1,SOIL_AB,Soil,0.30,true
+P154-3E,High,URM,Level 1,SOIL_E_LOW_RISE,Soil,-0.20,true
+P154-3E,High,URM,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.20,true
+P154-3E,High,MH,Level 1,VERTICAL_SEVERE,Vertical Irregularity,,false
+P154-3E,High,MH,Level 1,VERTICAL_MODERATE,Vertical Irregularity,,false
+P154-3E,High,MH,Level 1,PLAN_IRREGULARITY,Plan Irregularity,,false
+P154-3E,High,MH,Level 1,PRE_CODE,Pre-Code,-0.10,true
+P154-3E,High,MH,Level 1,POST_BENCHMARK,Post-Benchmark,1.20,true
+P154-3E,High,MH,Level 1,SOIL_AB,Soil,0.30,true
+P154-3E,High,MH,Level 1,SOIL_E_LOW_RISE,Soil,-0.40,true
+P154-3E,High,MH,Level 1,SOIL_E_MID_HIGH_RISE,Soil,,false
+P154-3E,Moderately High,W1,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.30,true
+P154-3E,Moderately High,W1,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.80,true
+P154-3E,Moderately High,W1,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-1.30,true
+P154-3E,Moderately High,W1,Level 1,PRE_CODE,Pre-Code,-0.80,true
+P154-3E,Moderately High,W1,Level 1,POST_BENCHMARK,Post-Benchmark,1.50,true
+P154-3E,Moderately High,W1,Level 1,SOIL_AB,Soil,0.30,true
+P154-3E,Moderately High,W1,Level 1,SOIL_E_LOW_RISE,Soil,0.00,true
+P154-3E,Moderately High,W1,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.50,true
+P154-3E,Moderately High,W1A,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.30,true
+P154-3E,Moderately High,W1A,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.80,true
+P154-3E,Moderately High,W1A,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-1.20,true
+P154-3E,Moderately High,W1A,Level 1,PRE_CODE,Pre-Code,-0.90,true
+P154-3E,Moderately High,W1A,Level 1,POST_BENCHMARK,Post-Benchmark,1.90,true
+P154-3E,Moderately High,W1A,Level 1,SOIL_AB,Soil,0.60,true
+P154-3E,Moderately High,W1A,Level 1,SOIL_E_LOW_RISE,Soil,-0.10,true
+P154-3E,Moderately High,W1A,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.80,true
+P154-3E,Moderately High,W2,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.30,true
+P154-3E,Moderately High,W2,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.80,true
+P154-3E,Moderately High,W2,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-1.10,true
+P154-3E,Moderately High,W2,Level 1,PRE_CODE,Pre-Code,-0.90,true
+P154-3E,Moderately High,W2,Level 1,POST_BENCHMARK,Post-Benchmark,2.30,true
+P154-3E,Moderately High,W2,Level 1,SOIL_AB,Soil,0.90,true
+P154-3E,Moderately High,W2,Level 1,SOIL_E_LOW_RISE,Soil,-0.30,true
+P154-3E,Moderately High,W2,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-1.20,true
+P154-3E,Moderately High,S1,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.10,true
+P154-3E,Moderately High,S1,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.70,true
+P154-3E,Moderately High,S1,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.90,true
+P154-3E,Moderately High,S1,Level 1,PRE_CODE,Pre-Code,-0.50,true
+P154-3E,Moderately High,S1,Level 1,POST_BENCHMARK,Post-Benchmark,1.40,true
+P154-3E,Moderately High,S1,Level 1,SOIL_AB,Soil,0.60,true
+P154-3E,Moderately High,S1,Level 1,SOIL_E_LOW_RISE,Soil,-0.40,true
+P154-3E,Moderately High,S1,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.70,true
+P154-3E,Moderately High,S2,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.00,true
+P154-3E,Moderately High,S2,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.60,true
+P154-3E,Moderately High,S2,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.80,true
+P154-3E,Moderately High,S2,Level 1,PRE_CODE,Pre-Code,-0.50,true
+P154-3E,Moderately High,S2,Level 1,POST_BENCHMARK,Post-Benchmark,1.40,true
+P154-3E,Moderately High,S2,Level 1,SOIL_AB,Soil,0.90,true
+P154-3E,Moderately High,S2,Level 1,SOIL_E_LOW_RISE,Soil,-0.50,true
+P154-3E,Moderately High,S2,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.70,true
+P154-3E,Moderately High,S3,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.20,true
+P154-3E,Moderately High,S3,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.80,true
+P154-3E,Moderately High,S3,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-1.00,true
+P154-3E,Moderately High,S3,Level 1,PRE_CODE,Pre-Code,-0.70,true
+P154-3E,Moderately High,S3,Level 1,POST_BENCHMARK,Post-Benchmark,1.00,true
+P154-3E,Moderately High,S3,Level 1,SOIL_AB,Soil,0.30,true
+P154-3E,Moderately High,S3,Level 1,SOIL_E_LOW_RISE,Soil,0.00,true
+P154-3E,Moderately High,S3,Level 1,SOIL_E_MID_HIGH_RISE,Soil,,false
+P154-3E,Moderately High,S4,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.00,true
+P154-3E,Moderately High,S4,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.60,true
+P154-3E,Moderately High,S4,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.80,true
+P154-3E,Moderately High,S4,Level 1,PRE_CODE,Pre-Code,-0.60,true
+P154-3E,Moderately High,S4,Level 1,POST_BENCHMARK,Post-Benchmark,1.90,true
+P154-3E,Moderately High,S4,Level 1,SOIL_AB,Soil,0.90,true
+P154-3E,Moderately High,S4,Level 1,SOIL_E_LOW_RISE,Soil,-0.40,true
+P154-3E,Moderately High,S4,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.70,true
+P154-3E,Moderately High,S5,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-0.90,true
+P154-3E,Moderately High,S5,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.60,true
+P154-3E,Moderately High,S5,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.70,true
+P154-3E,Moderately High,S5,Level 1,PRE_CODE,Pre-Code,-0.20,true
+P154-3E,Moderately High,S5,Level 1,POST_BENCHMARK,Post-Benchmark,,false
+P154-3E,Moderately High,S5,Level 1,SOIL_AB,Soil,0.90,true
+P154-3E,Moderately High,S5,Level 1,SOIL_E_LOW_RISE,Soil,-0.50,true
+P154-3E,Moderately High,S5,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.60,true
+P154-3E,Moderately High,C1,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.00,true
+P154-3E,Moderately High,C1,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.60,true
+P154-3E,Moderately High,C1,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.70,true
+P154-3E,Moderately High,C1,Level 1,PRE_CODE,Pre-Code,-0.40,true
+P154-3E,Moderately High,C1,Level 1,POST_BENCHMARK,Post-Benchmark,1.90,true
+P154-3E,Moderately High,C1,Level 1,SOIL_AB,Soil,0.60,true
+P154-3E,Moderately High,C1,Level 1,SOIL_E_LOW_RISE,Soil,-0.20,true
+P154-3E,Moderately High,C1,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.60,true
+P154-3E,Moderately High,C2,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.10,true
+P154-3E,Moderately High,C2,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.60,true
+P154-3E,Moderately High,C2,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.90,true
+P154-3E,Moderately High,C2,Level 1,PRE_CODE,Pre-Code,-0.70,true
+P154-3E,Moderately High,C2,Level 1,POST_BENCHMARK,Post-Benchmark,2.10,true
+P154-3E,Moderately High,C2,Level 1,SOIL_AB,Soil,0.80,true
+P154-3E,Moderately High,C2,Level 1,SOIL_E_LOW_RISE,Soil,-0.20,true
+P154-3E,Moderately High,C2,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.80,true
+P154-3E,Moderately High,C3,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-0.80,true
+P154-3E,Moderately High,C3,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.50,true
+P154-3E,Moderately High,C3,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.60,true
+P154-3E,Moderately High,C3,Level 1,PRE_CODE,Pre-Code,-0.10,true
+P154-3E,Moderately High,C3,Level 1,POST_BENCHMARK,Post-Benchmark,,false
+P154-3E,Moderately High,C3,Level 1,SOIL_AB,Soil,0.70,true
+P154-3E,Moderately High,C3,Level 1,SOIL_E_LOW_RISE,Soil,-0.40,true
+P154-3E,Moderately High,C3,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.40,true
+P154-3E,Moderately High,PC1,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.00,true
+P154-3E,Moderately High,PC1,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.60,true
+P154-3E,Moderately High,PC1,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.80,true
+P154-3E,Moderately High,PC1,Level 1,PRE_CODE,Pre-Code,-0.40,true
+P154-3E,Moderately High,PC1,Level 1,POST_BENCHMARK,Post-Benchmark,2.10,true
+P154-3E,Moderately High,PC1,Level 1,SOIL_AB,Soil,0.90,true
+P154-3E,Moderately High,PC1,Level 1,SOIL_E_LOW_RISE,Soil,-0.50,true
+P154-3E,Moderately High,PC1,Level 1,SOIL_E_MID_HIGH_RISE,Soil,,false
+P154-3E,Moderately High,PC2,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-0.90,true
+P154-3E,Moderately High,PC2,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.60,true
+P154-3E,Moderately High,PC2,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.70,true
+P154-3E,Moderately High,PC2,Level 1,PRE_CODE,Pre-Code,-0.30,true
+P154-3E,Moderately High,PC2,Level 1,POST_BENCHMARK,Post-Benchmark,2.40,true
+P154-3E,Moderately High,PC2,Level 1,SOIL_AB,Soil,0.70,true
+P154-3E,Moderately High,PC2,Level 1,SOIL_E_LOW_RISE,Soil,-0.30,true
+P154-3E,Moderately High,PC2,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.50,true
+P154-3E,Moderately High,RM1,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.00,true
+P154-3E,Moderately High,RM1,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.60,true
+P154-3E,Moderately High,RM1,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.70,true
+P154-3E,Moderately High,RM1,Level 1,PRE_CODE,Pre-Code,-0.50,true
+P154-3E,Moderately High,RM1,Level 1,POST_BENCHMARK,Post-Benchmark,2.10,true
+P154-3E,Moderately High,RM1,Level 1,SOIL_AB,Soil,0.80,true
+P154-3E,Moderately High,RM1,Level 1,SOIL_E_LOW_RISE,Soil,-0.40,true
+P154-3E,Moderately High,RM1,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.60,true
+P154-3E,Moderately High,RM2,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.00,true
+P154-3E,Moderately High,RM2,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.60,true
+P154-3E,Moderately High,RM2,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.70,true
+P154-3E,Moderately High,RM2,Level 1,PRE_CODE,Pre-Code,-0.50,true
+P154-3E,Moderately High,RM2,Level 1,POST_BENCHMARK,Post-Benchmark,2.10,true
+P154-3E,Moderately High,RM2,Level 1,SOIL_AB,Soil,0.80,true
+P154-3E,Moderately High,RM2,Level 1,SOIL_E_LOW_RISE,Soil,-0.40,true
+P154-3E,Moderately High,RM2,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.70,true
+P154-3E,Moderately High,URM,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-0.80,true
+P154-3E,Moderately High,URM,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.50,true
+P154-3E,Moderately High,URM,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.50,true
+P154-3E,Moderately High,URM,Level 1,PRE_CODE,Pre-Code,-0.10,true
+P154-3E,Moderately High,URM,Level 1,POST_BENCHMARK,Post-Benchmark,,false
+P154-3E,Moderately High,URM,Level 1,SOIL_AB,Soil,0.60,true
+P154-3E,Moderately High,URM,Level 1,SOIL_E_LOW_RISE,Soil,-0.30,true
+P154-3E,Moderately High,URM,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.30,true
+P154-3E,Moderately High,MH,Level 1,VERTICAL_SEVERE,Vertical Irregularity,,false
+P154-3E,Moderately High,MH,Level 1,VERTICAL_MODERATE,Vertical Irregularity,,false
+P154-3E,Moderately High,MH,Level 1,PLAN_IRREGULARITY,Plan Irregularity,,false
+P154-3E,Moderately High,MH,Level 1,PRE_CODE,Pre-Code,-0.30,true
+P154-3E,Moderately High,MH,Level 1,POST_BENCHMARK,Post-Benchmark,1.20,true
+P154-3E,Moderately High,MH,Level 1,SOIL_AB,Soil,0.90,true
+P154-3E,Moderately High,MH,Level 1,SOIL_E_LOW_RISE,Soil,-0.50,true
+P154-3E,Moderately High,MH,Level 1,SOIL_E_MID_HIGH_RISE,Soil,,false
+P154-3E,Moderate,W1,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.40,true
+P154-3E,Moderate,W1,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.90,true
+P154-3E,Moderate,W1,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-1.40,true
+P154-3E,Moderate,W1,Level 1,PRE_CODE,Pre-Code,-0.30,true
+P154-3E,Moderate,W1,Level 1,POST_BENCHMARK,Post-Benchmark,1.40,true
+P154-3E,Moderate,W1,Level 1,SOIL_AB,Soil,0.70,true
+P154-3E,Moderate,W1,Level 1,SOIL_E_LOW_RISE,Soil,-1.20,true
+P154-3E,Moderate,W1,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-1.80,true
+P154-3E,Moderate,W1A,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.40,true
+P154-3E,Moderate,W1A,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.90,true
+P154-3E,Moderate,W1A,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-1.30,true
+P154-3E,Moderate,W1A,Level 1,PRE_CODE,Pre-Code,-0.50,true
+P154-3E,Moderate,W1A,Level 1,POST_BENCHMARK,Post-Benchmark,2.00,true
+P154-3E,Moderate,W1A,Level 1,SOIL_AB,Soil,1.20,true
+P154-3E,Moderate,W1A,Level 1,SOIL_E_LOW_RISE,Soil,-1.30,true
+P154-3E,Moderate,W1A,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-1.60,true
+P154-3E,Moderate,W2,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.40,true
+P154-3E,Moderate,W2,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.90,true
+P154-3E,Moderate,W2,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-1.20,true
+P154-3E,Moderate,W2,Level 1,PRE_CODE,Pre-Code,-0.60,true
+P154-3E,Moderate,W2,Level 1,POST_BENCHMARK,Post-Benchmark,2.50,true
+P154-3E,Moderate,W2,Level 1,SOIL_AB,Soil,1.80,true
+P154-3E,Moderate,W2,Level 1,SOIL_E_LOW_RISE,Soil,-1.40,true
+P154-3E,Moderate,W2,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-1.30,true
+P154-3E,Moderate,S1,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.20,true
+P154-3E,Moderate,S1,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.80,true
+P154-3E,Moderate,S1,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-1.00,true
+P154-3E,Moderate,S1,Level 1,PRE_CODE,Pre-Code,-0.30,true
+P154-3E,Moderate,S1,Level 1,POST_BENCHMARK,Post-Benchmark,1.50,true
+P154-3E,Moderate,S1,Level 1,SOIL_AB,Soil,1.10,true
+P154-3E,Moderate,S1,Level 1,SOIL_E_LOW_RISE,Soil,-0.90,true
+P154-3E,Moderate,S1,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.90,true
+P154-3E,Moderate,S2,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.20,true
+P154-3E,Moderate,S2,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.70,true
+P154-3E,Moderate,S2,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.90,true
+P154-3E,Moderate,S2,Level 1,PRE_CODE,Pre-Code,-0.20,true
+P154-3E,Moderate,S2,Level 1,POST_BENCHMARK,Post-Benchmark,1.50,true
+P154-3E,Moderate,S2,Level 1,SOIL_AB,Soil,1.40,true
+P154-3E,Moderate,S2,Level 1,SOIL_E_LOW_RISE,Soil,-0.90,true
+P154-3E,Moderate,S2,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.90,true
+P154-3E,Moderate,S3,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.40,true
+P154-3E,Moderate,S3,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.90,true
+P154-3E,Moderate,S3,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-1.20,true
+P154-3E,Moderate,S3,Level 1,PRE_CODE,Pre-Code,-0.20,true
+P154-3E,Moderate,S3,Level 1,POST_BENCHMARK,Post-Benchmark,0.80,true
+P154-3E,Moderate,S3,Level 1,SOIL_AB,Soil,0.60,true
+P154-3E,Moderate,S3,Level 1,SOIL_E_LOW_RISE,Soil,-1.00,true
+P154-3E,Moderate,S3,Level 1,SOIL_E_MID_HIGH_RISE,Soil,,false
+P154-3E,Moderate,S4,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.10,true
+P154-3E,Moderate,S4,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.70,true
+P154-3E,Moderate,S4,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.90,true
+P154-3E,Moderate,S4,Level 1,PRE_CODE,Pre-Code,-0.30,true
+P154-3E,Moderate,S4,Level 1,POST_BENCHMARK,Post-Benchmark,2.10,true
+P154-3E,Moderate,S4,Level 1,SOIL_AB,Soil,1.50,true
+P154-3E,Moderate,S4,Level 1,SOIL_E_LOW_RISE,Soil,-0.90,true
+P154-3E,Moderate,S4,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.90,true
+P154-3E,Moderate,S5,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.20,true
+P154-3E,Moderate,S5,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.70,true
+P154-3E,Moderate,S5,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.90,true
+P154-3E,Moderate,S5,Level 1,PRE_CODE,Pre-Code,-0.30,true
+P154-3E,Moderate,S5,Level 1,POST_BENCHMARK,Post-Benchmark,,false
+P154-3E,Moderate,S5,Level 1,SOIL_AB,Soil,1.60,true
+P154-3E,Moderate,S5,Level 1,SOIL_E_LOW_RISE,Soil,-0.90,true
+P154-3E,Moderate,S5,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-1.00,true
+P154-3E,Moderate,C1,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.10,true
+P154-3E,Moderate,C1,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.70,true
+P154-3E,Moderate,C1,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.80,true
+P154-3E,Moderate,C1,Level 1,PRE_CODE,Pre-Code,-0.30,true
+P154-3E,Moderate,C1,Level 1,POST_BENCHMARK,Post-Benchmark,2.00,true
+P154-3E,Moderate,C1,Level 1,SOIL_AB,Soil,1.10,true
+P154-3E,Moderate,C1,Level 1,SOIL_E_LOW_RISE,Soil,-0.70,true
+P154-3E,Moderate,C1,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.80,true
+P154-3E,Moderate,C2,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.20,true
+P154-3E,Moderate,C2,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.70,true
+P154-3E,Moderate,C2,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-1.00,true
+P154-3E,Moderate,C2,Level 1,PRE_CODE,Pre-Code,-0.40,true
+P154-3E,Moderate,C2,Level 1,POST_BENCHMARK,Post-Benchmark,2.30,true
+P154-3E,Moderate,C2,Level 1,SOIL_AB,Soil,1.50,true
+P154-3E,Moderate,C2,Level 1,SOIL_E_LOW_RISE,Soil,-1.00,true
+P154-3E,Moderate,C2,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-1.00,true
+P154-3E,Moderate,C3,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.00,true
+P154-3E,Moderate,C3,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.60,true
+P154-3E,Moderate,C3,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.80,true
+P154-3E,Moderate,C3,Level 1,PRE_CODE,Pre-Code,-0.30,true
+P154-3E,Moderate,C3,Level 1,POST_BENCHMARK,Post-Benchmark,,false
+P154-3E,Moderate,C3,Level 1,SOIL_AB,Soil,1.30,true
+P154-3E,Moderate,C3,Level 1,SOIL_E_LOW_RISE,Soil,-0.70,true
+P154-3E,Moderate,C3,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.80,true
+P154-3E,Moderate,PC1,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.10,true
+P154-3E,Moderate,PC1,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.70,true
+P154-3E,Moderate,PC1,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.90,true
+P154-3E,Moderate,PC1,Level 1,PRE_CODE,Pre-Code,-0.20,true
+P154-3E,Moderate,PC1,Level 1,POST_BENCHMARK,Post-Benchmark,2.10,true
+P154-3E,Moderate,PC1,Level 1,SOIL_AB,Soil,1.60,true
+P154-3E,Moderate,PC1,Level 1,SOIL_E_LOW_RISE,Soil,-0.80,true
+P154-3E,Moderate,PC1,Level 1,SOIL_E_MID_HIGH_RISE,Soil,,false
+P154-3E,Moderate,PC2,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.00,true
+P154-3E,Moderate,PC2,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.60,true
+P154-3E,Moderate,PC2,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.80,true
+P154-3E,Moderate,PC2,Level 1,PRE_CODE,Pre-Code,-0.20,true
+P154-3E,Moderate,PC2,Level 1,POST_BENCHMARK,Post-Benchmark,2.50,true
+P154-3E,Moderate,PC2,Level 1,SOIL_AB,Soil,1.30,true
+P154-3E,Moderate,PC2,Level 1,SOIL_E_LOW_RISE,Soil,-0.70,true
+P154-3E,Moderate,PC2,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.70,true
+P154-3E,Moderate,RM1,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.10,true
+P154-3E,Moderate,RM1,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.70,true
+P154-3E,Moderate,RM1,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.80,true
+P154-3E,Moderate,RM1,Level 1,PRE_CODE,Pre-Code,-0.20,true
+P154-3E,Moderate,RM1,Level 1,POST_BENCHMARK,Post-Benchmark,2.30,true
+P154-3E,Moderate,RM1,Level 1,SOIL_AB,Soil,1.40,true
+P154-3E,Moderate,RM1,Level 1,SOIL_E_LOW_RISE,Soil,-0.80,true
+P154-3E,Moderate,RM1,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.70,true
+P154-3E,Moderate,RM2,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.10,true
+P154-3E,Moderate,RM2,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.70,true
+P154-3E,Moderate,RM2,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.80,true
+P154-3E,Moderate,RM2,Level 1,PRE_CODE,Pre-Code,-0.20,true
+P154-3E,Moderate,RM2,Level 1,POST_BENCHMARK,Post-Benchmark,2.30,true
+P154-3E,Moderate,RM2,Level 1,SOIL_AB,Soil,1.40,true
+P154-3E,Moderate,RM2,Level 1,SOIL_E_LOW_RISE,Soil,-0.80,true
+P154-3E,Moderate,RM2,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.80,true
+P154-3E,Moderate,URM,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.00,true
+P154-3E,Moderate,URM,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.60,true
+P154-3E,Moderate,URM,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.70,true
+P154-3E,Moderate,URM,Level 1,PRE_CODE,Pre-Code,-0.10,true
+P154-3E,Moderate,URM,Level 1,POST_BENCHMARK,Post-Benchmark,,false
+P154-3E,Moderate,URM,Level 1,SOIL_AB,Soil,1.30,true
+P154-3E,Moderate,URM,Level 1,SOIL_E_LOW_RISE,Soil,-0.60,true
+P154-3E,Moderate,URM,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-0.60,true
+P154-3E,Moderate,MH,Level 1,VERTICAL_SEVERE,Vertical Irregularity,,false
+P154-3E,Moderate,MH,Level 1,VERTICAL_MODERATE,Vertical Irregularity,,false
+P154-3E,Moderate,MH,Level 1,PLAN_IRREGULARITY,Plan Irregularity,,false
+P154-3E,Moderate,MH,Level 1,PRE_CODE,Pre-Code,-0.50,true
+P154-3E,Moderate,MH,Level 1,POST_BENCHMARK,Post-Benchmark,1.20,true
+P154-3E,Moderate,MH,Level 1,SOIL_AB,Soil,1.60,true
+P154-3E,Moderate,MH,Level 1,SOIL_E_LOW_RISE,Soil,-0.90,true
+P154-3E,Moderate,MH,Level 1,SOIL_E_MID_HIGH_RISE,Soil,,false
+P154-3E,Low,W1,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.50,true
+P154-3E,Low,W1,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-1.00,true
+P154-3E,Low,W1,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-1.60,true
+P154-3E,Low,W1,Level 1,PRE_CODE,Pre-Code,,false
+P154-3E,Low,W1,Level 1,POST_BENCHMARK,Post-Benchmark,2.20,true
+P154-3E,Low,W1,Level 1,SOIL_AB,Soil,0.90,true
+P154-3E,Low,W1,Level 1,SOIL_E_LOW_RISE,Soil,-1.20,true
+P154-3E,Low,W1,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-1.70,true
+P154-3E,Low,W1A,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.50,true
+P154-3E,Low,W1A,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.90,true
+P154-3E,Low,W1A,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-1.40,true
+P154-3E,Low,W1A,Level 1,PRE_CODE,Pre-Code,,false
+P154-3E,Low,W1A,Level 1,POST_BENCHMARK,Post-Benchmark,2.40,true
+P154-3E,Low,W1A,Level 1,SOIL_AB,Soil,1.10,true
+P154-3E,Low,W1A,Level 1,SOIL_E_LOW_RISE,Soil,-1.70,true
+P154-3E,Low,W1A,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-2.00,true
+P154-3E,Low,W2,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.50,true
+P154-3E,Low,W2,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.90,true
+P154-3E,Low,W2,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-1.30,true
+P154-3E,Low,W2,Level 1,PRE_CODE,Pre-Code,,false
+P154-3E,Low,W2,Level 1,POST_BENCHMARK,Post-Benchmark,2.50,true
+P154-3E,Low,W2,Level 1,SOIL_AB,Soil,1.30,true
+P154-3E,Low,W2,Level 1,SOIL_E_LOW_RISE,Soil,-2.30,true
+P154-3E,Low,W2,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-2.20,true
+P154-3E,Low,S1,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.40,true
+P154-3E,Low,S1,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.90,true
+P154-3E,Low,S1,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-1.20,true
+P154-3E,Low,S1,Level 1,PRE_CODE,Pre-Code,,false
+P154-3E,Low,S1,Level 1,POST_BENCHMARK,Post-Benchmark,2.00,true
+P154-3E,Low,S1,Level 1,SOIL_AB,Soil,1.00,true
+P154-3E,Low,S1,Level 1,SOIL_E_LOW_RISE,Soil,-1.20,true
+P154-3E,Low,S1,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-1.20,true
+P154-3E,Low,S2,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.30,true
+P154-3E,Low,S2,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.80,true
+P154-3E,Low,S2,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-1.10,true
+P154-3E,Low,S2,Level 1,PRE_CODE,Pre-Code,,false
+P154-3E,Low,S2,Level 1,POST_BENCHMARK,Post-Benchmark,1.60,true
+P154-3E,Low,S2,Level 1,SOIL_AB,Soil,1.20,true
+P154-3E,Low,S2,Level 1,SOIL_E_LOW_RISE,Soil,-1.40,true
+P154-3E,Low,S2,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-1.40,true
+P154-3E,Low,S3,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.60,true
+P154-3E,Low,S3,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-1.00,true
+P154-3E,Low,S3,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-1.40,true
+P154-3E,Low,S3,Level 1,PRE_CODE,Pre-Code,,false
+P154-3E,Low,S3,Level 1,POST_BENCHMARK,Post-Benchmark,1.40,true
+P154-3E,Low,S3,Level 1,SOIL_AB,Soil,0.80,true
+P154-3E,Low,S3,Level 1,SOIL_E_LOW_RISE,Soil,-1.00,true
+P154-3E,Low,S3,Level 1,SOIL_E_MID_HIGH_RISE,Soil,,false
+P154-3E,Low,S4,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.20,true
+P154-3E,Low,S4,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.70,true
+P154-3E,Low,S4,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-1.00,true
+P154-3E,Low,S4,Level 1,PRE_CODE,Pre-Code,,false
+P154-3E,Low,S4,Level 1,POST_BENCHMARK,Post-Benchmark,2.10,true
+P154-3E,Low,S4,Level 1,SOIL_AB,Soil,1.30,true
+P154-3E,Low,S4,Level 1,SOIL_E_LOW_RISE,Soil,-1.70,true
+P154-3E,Low,S4,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-1.70,true
+P154-3E,Low,S5,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.30,true
+P154-3E,Low,S5,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.70,true
+P154-3E,Low,S5,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-1.10,true
+P154-3E,Low,S5,Level 1,PRE_CODE,Pre-Code,,false
+P154-3E,Low,S5,Level 1,POST_BENCHMARK,Post-Benchmark,,false
+P154-3E,Low,S5,Level 1,SOIL_AB,Soil,1.40,true
+P154-3E,Low,S5,Level 1,SOIL_E_LOW_RISE,Soil,-2.00,true
+P154-3E,Low,S5,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-1.90,true
+P154-3E,Low,C1,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.30,true
+P154-3E,Low,C1,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.70,true
+P154-3E,Low,C1,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-1.00,true
+P154-3E,Low,C1,Level 1,PRE_CODE,Pre-Code,,false
+P154-3E,Low,C1,Level 1,POST_BENCHMARK,Post-Benchmark,2.30,true
+P154-3E,Low,C1,Level 1,SOIL_AB,Soil,0.90,true
+P154-3E,Low,C1,Level 1,SOIL_E_LOW_RISE,Soil,-1.40,true
+P154-3E,Low,C1,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-1.30,true
+P154-3E,Low,C2,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.20,true
+P154-3E,Low,C2,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.70,true
+P154-3E,Low,C2,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-1.00,true
+P154-3E,Low,C2,Level 1,PRE_CODE,Pre-Code,,false
+P154-3E,Low,C2,Level 1,POST_BENCHMARK,Post-Benchmark,2.20,true
+P154-3E,Low,C2,Level 1,SOIL_AB,Soil,1.20,true
+P154-3E,Low,C2,Level 1,SOIL_E_LOW_RISE,Soil,-2.00,true
+P154-3E,Low,C2,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-1.90,true
+P154-3E,Low,C3,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.10,true
+P154-3E,Low,C3,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.60,true
+P154-3E,Low,C3,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.90,true
+P154-3E,Low,C3,Level 1,PRE_CODE,Pre-Code,,false
+P154-3E,Low,C3,Level 1,POST_BENCHMARK,Post-Benchmark,,false
+P154-3E,Low,C3,Level 1,SOIL_AB,Soil,1.20,true
+P154-3E,Low,C3,Level 1,SOIL_E_LOW_RISE,Soil,-1.60,true
+P154-3E,Low,C3,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-1.60,true
+P154-3E,Low,PC1,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.30,true
+P154-3E,Low,PC1,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.80,true
+P154-3E,Low,PC1,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-1.20,true
+P154-3E,Low,PC1,Level 1,PRE_CODE,Pre-Code,,false
+P154-3E,Low,PC1,Level 1,POST_BENCHMARK,Post-Benchmark,1.90,true
+P154-3E,Low,PC1,Level 1,SOIL_AB,Soil,1.30,true
+P154-3E,Low,PC1,Level 1,SOIL_E_LOW_RISE,Soil,-1.70,true
+P154-3E,Low,PC1,Level 1,SOIL_E_MID_HIGH_RISE,Soil,,false
+P154-3E,Low,PC2,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.10,true
+P154-3E,Low,PC2,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.60,true
+P154-3E,Low,PC2,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.90,true
+P154-3E,Low,PC2,Level 1,PRE_CODE,Pre-Code,,false
+P154-3E,Low,PC2,Level 1,POST_BENCHMARK,Post-Benchmark,2.60,true
+P154-3E,Low,PC2,Level 1,SOIL_AB,Soil,1.30,true
+P154-3E,Low,PC2,Level 1,SOIL_E_LOW_RISE,Soil,-1.60,true
+P154-3E,Low,PC2,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-1.60,true
+P154-3E,Low,RM1,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.10,true
+P154-3E,Low,RM1,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.60,true
+P154-3E,Low,RM1,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.90,true
+P154-3E,Low,RM1,Level 1,PRE_CODE,Pre-Code,,false
+P154-3E,Low,RM1,Level 1,POST_BENCHMARK,Post-Benchmark,2.30,true
+P154-3E,Low,RM1,Level 1,SOIL_AB,Soil,1.40,true
+P154-3E,Low,RM1,Level 1,SOIL_E_LOW_RISE,Soil,-1.70,true
+P154-3E,Low,RM1,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-1.60,true
+P154-3E,Low,RM2,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.10,true
+P154-3E,Low,RM2,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.60,true
+P154-3E,Low,RM2,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-0.90,true
+P154-3E,Low,RM2,Level 1,PRE_CODE,Pre-Code,,false
+P154-3E,Low,RM2,Level 1,POST_BENCHMARK,Post-Benchmark,2.30,true
+P154-3E,Low,RM2,Level 1,SOIL_AB,Soil,1.40,true
+P154-3E,Low,RM2,Level 1,SOIL_E_LOW_RISE,Soil,-1.70,true
+P154-3E,Low,RM2,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-1.70,true
+P154-3E,Low,URM,Level 1,VERTICAL_SEVERE,Vertical Irregularity,-1.20,true
+P154-3E,Low,URM,Level 1,VERTICAL_MODERATE,Vertical Irregularity,-0.70,true
+P154-3E,Low,URM,Level 1,PLAN_IRREGULARITY,Plan Irregularity,-1.00,true
+P154-3E,Low,URM,Level 1,PRE_CODE,Pre-Code,,false
+P154-3E,Low,URM,Level 1,POST_BENCHMARK,Post-Benchmark,,false
+P154-3E,Low,URM,Level 1,SOIL_AB,Soil,1.30,true
+P154-3E,Low,URM,Level 1,SOIL_E_LOW_RISE,Soil,-1.50,true
+P154-3E,Low,URM,Level 1,SOIL_E_MID_HIGH_RISE,Soil,-1.40,true
+P154-3E,Low,MH,Level 1,VERTICAL_SEVERE,Vertical Irregularity,,false
+P154-3E,Low,MH,Level 1,VERTICAL_MODERATE,Vertical Irregularity,,false
+P154-3E,Low,MH,Level 1,PLAN_IRREGULARITY,Plan Irregularity,,false
+P154-3E,Low,MH,Level 1,PRE_CODE,Pre-Code,,false
+P154-3E,Low,MH,Level 1,POST_BENCHMARK,Post-Benchmark,1.80,true
+P154-3E,Low,MH,Level 1,SOIL_AB,Soil,0.90,true
+P154-3E,Low,MH,Level 1,SOIL_E_LOW_RISE,Soil,-2.10,true
+P154-3E,Low,MH,Level 1,SOIL_E_MID_HIGH_RISE,Soil,,false
