@@ -49,7 +49,7 @@ D:\building-assessment
 ## Current Phase
 
 ```text
-FEMA Reference Data / Level 1 Score Modifiers
+Assessment Structural Detail Filament UI
 ```
 
 ---
@@ -2285,4 +2285,1277 @@ Assessment Historical Data / Automatic Building Snapshot Creation
 
 ```text
 Assessment Structural Detail model + migration design/implementation
+```
+
+---
+
+## Assessment Structural Detail Data Layer Log
+
+### Current Phase
+
+```text
+Assessment Structural Detail Data Layer
+```
+
+### Files Created / Modified
+
+- `database/migrations/2026_09_20_020000_create_assessment_structural_details_table.php`
+- `app/Models/AssessmentStructuralDetail.php`
+- `app/Models/Assessment.php`
+- `tests/Feature/AssessmentStructuralDetailTest.php`
+- `STATUS.md`
+- `DOCUMENTATION.md`
+
+### Implementation Completed
+
+Created the Assessment Structural Detail data layer for assessment-specific structural and FEMA input data.
+
+Implemented the `assessment_structural_details` table with one structural detail record per Assessment.
+
+The table intentionally uses `assessments.fema_version_id` as the single source of truth for FEMA version selection. No independently editable `fema_version_id` was added to `assessment_structural_details`.
+
+The implementation is limited to structural/FEMA input data only. Scoring-result fields were intentionally not implemented in this task.
+
+### Final Migration Schema
+
+```text
+id
+assessment_id
+fema_building_type_id
+fema_version_code_snapshot
+fema_version_title_snapshot
+fema_version_edition_snapshot
+fema_building_type_code_snapshot
+fema_building_type_name_snapshot
+material_category_snapshot
+structural_system_snapshot
+seismicity_level
+soil_type
+vertical_irregularity_type
+plan_irregularity_type
+has_pre_code_condition
+has_post_benchmark_condition
+site_condition_notes
+structural_observation_notes
+created_at
+updated_at
+```
+
+### Foreign Keys / Constraints / Indexes
+
+- `assessment_id` is required, unique, constrained to `assessments.id`, and uses `cascadeOnDelete()`.
+- `fema_building_type_id` is nullable, constrained to `fema_building_types.id`, and uses `restrictOnDelete()`.
+- Indexes were added for:
+  - `fema_building_type_id`
+  - `seismicity_level`
+  - `soil_type`
+
+### Model Relationships
+
+`Assessment` now has:
+
+```php
+public function femaVersion(): BelongsTo
+public function structuralDetail(): HasOne
+```
+
+`AssessmentStructuralDetail` has:
+
+```php
+public function assessment(): BelongsTo
+public function femaBuildingType(): BelongsTo
+```
+
+### Casts
+
+`AssessmentStructuralDetail` casts:
+
+```php
+has_pre_code_condition => boolean
+has_post_benchmark_condition => boolean
+```
+
+The nullable boolean columns preserve unknown values as `null` for incomplete Draft assessments.
+
+### Structural Input Values
+
+Vertical irregularity supported values are represented in the model as:
+
+```text
+none
+moderate
+severe
+```
+
+Plan irregularity supported values are represented in the model as:
+
+```text
+none
+irregular
+```
+
+Soil type supported values are aligned with existing FEMA Level 1 score modifier codes:
+
+```text
+SOIL_AB
+SOIL_E_LOW_RISE
+SOIL_E_MID_HIGH_RISE
+```
+
+Seismicity level supported values are represented in the model as:
+
+```text
+Low
+Moderate
+Moderately High
+High
+Very High
+```
+
+### Snapshot Behavior
+
+When an Assessment Structural Detail is saved:
+
+- FEMA version descriptive values are snapshotted from the related Assessment's `fema_version_id`:
+  - `code`
+  - `title`
+  - `edition`
+- FEMA Building Type descriptive values are snapshotted from the selected `fema_building_type_id`:
+  - `code`
+  - `name`
+  - `material_category`
+  - `structural_system`
+
+This preserves the descriptive reference context used at assessment time without duplicating Building Registry historical fields already stored in `assessment_building_snapshots`.
+
+### Intentional Exclusions
+
+This task did not implement:
+
+- Filament UI for structural details
+- FEMA scoring engine
+- Basic Score calculation
+- Score modifier application
+- Minimum-score handling
+- Final Score calculation
+- Workflow/status actions
+- Findings, photos, reports, roles/permissions, audit trail, dashboard, GIS, or recommendations
+
+These scoring-related fields were intentionally excluded:
+
+- `fema_basic_score_id`
+- `basic_score_snapshot`
+- `fema_minimum_score_id`
+- `minimum_score_snapshot`
+- modifier totals
+- calculated score
+- final score
+- applied modifier snapshots
+- calculation trace
+
+Future calculations must use `assessment_building_snapshots` for historical Building Registry context such as number of storeys.
+
+### Tests Added
+
+Added `tests/Feature/AssessmentStructuralDetailTest.php` covering:
+
+- structural detail creation
+- Assessment to structural detail relationship
+- structural detail to Assessment relationship
+- duplicate structural detail rejection for one Assessment
+- FEMA Building Type relationship
+- nullable Draft fields
+- nullable boolean unknown/null preservation
+- Assessment delete cascading to structural detail
+- referenced FEMA Building Type delete restriction
+- FEMA version and building type snapshot population
+- existing Assessment Building Snapshot behavior
+
+### Checks / Tests Performed
+
+- `php -l app\Models\Assessment.php`
+- `php -l app\Models\AssessmentStructuralDetail.php`
+- `php -l database\migrations\2026_09_20_020000_create_assessment_structural_details_table.php`
+- `php -l tests\Feature\AssessmentStructuralDetailTest.php`
+- `php artisan migrate`
+- `php artisan test tests\Feature\AssessmentStructuralDetailTest.php`
+- `php artisan test tests\Feature\AssessmentBuildingSnapshotTest.php`
+- `php artisan test`
+- `php artisan migrate:status`
+
+Focused structural detail test result:
+
+```text
+Tests: 6 passed (26 assertions)
+```
+
+Existing building snapshot focused test result:
+
+```text
+Tests: 1 passed (34 assertions)
+```
+
+Full test result:
+
+```text
+Tests: 9 passed (62 assertions)
+```
+
+### Migration Result
+
+```text
+2026_09_20_020000_create_assessment_structural_details_table [10] Ran
+```
+
+### Issues Encountered and Resolution
+
+- The sandbox helper blocked `apply_patch` and intermittently blocked sandboxed command execution.
+- Resolution: used narrow elevated PowerShell writes only for the declared files, then verified all changed PHP files with syntax checks and tests.
+- The first automated relationship insertion into `Assessment.php` did not land; the file was reread, corrected, and verified before running tests.
+- No Laravel migration, relationship, syntax, or PHPUnit failures remained after correction.
+
+### Current Limitations
+
+- Assessment Structural Detail has no Filament UI yet.
+- Structural detail data is not displayed on Assessment pages yet.
+- FEMA scoring, Basic Score lookup, modifier application, minimum-score handling, and final-score calculation are not implemented yet.
+- Structural Detail reference snapshots are synchronized on save, but completed-assessment locking/review workflow is not implemented yet.
+
+### Next Approved Development Step
+
+```text
+Assessment Structural Detail Filament UI
+```
+
+Do not proceed to the next development task until explicitly approved.
+
+---
+
+## Latest Project Status
+
+### Current Phase
+
+```text
+Assessment Structural Detail Data Layer
+```
+
+### Next Approved Development Step
+
+```text
+Assessment Structural Detail Filament UI
+```
+---
+
+## Assessment Structural Detail Filament UI Log
+
+### Current Phase
+
+```text
+Assessment Structural Detail Filament UI
+```
+
+### Files Created / Modified
+
+- `app/Filament/Resources/Assessments/AssessmentResource.php`
+- `app/Filament/Resources/Assessments/Pages/EditAssessment.php`
+- `tests/Feature/AssessmentStructuralDetailFilamentTest.php`
+- `STATUS.md`
+- `DOCUMENTATION.md`
+
+### Implementation Completed
+
+Integrated Assessment Structural Detail fields into the existing Assessment Filament Resource.
+
+This implementation is UI-only. It does not implement FEMA scoring, Basic Score calculation, modifier application, final score calculation, workflow/status actions, or completion validation.
+
+### UI Sections Added / Updated
+
+The Assessment form now uses these organized sections:
+
+- Assessment Information
+- FEMA Classification
+- Site / Soil
+- Irregularities
+- Code Conditions
+- Structural Notes
+- Status and Remarks
+
+The Assessment view/infolist now displays:
+
+- Assessment Information
+- Structural Detail
+- Structural Reference Snapshots
+- Status and Remarks
+
+### Relationship-Based Persistence
+
+Structural detail fields are persisted through the existing one-to-one relationship:
+
+```php
+Assessment::structuralDetail()
+```
+
+Filament `Section::relationship('structuralDetail')` is used for structural detail groups. The relationship section condition creates or updates `assessment_structural_details` only when relevant structural input is supplied, so creating an Assessment with no structural detail still works and does not create an empty structural detail record.
+
+### FEMA Version Behavior
+
+The authoritative FEMA version field remains:
+
+```text
+assessments.fema_version_id
+```
+
+The Assessment form now includes a FEMA Version selector using existing `FemaVersion` records. Labels display code, title, and edition.
+
+No independently editable FEMA version field was added to `assessment_structural_details`.
+
+When an Assessment is edited and `fema_version_id` changes, `EditAssessment::afterSave()` refreshes the structural detail FEMA version snapshot after the parent Assessment has been saved. This is needed because Filament saves HasOne relationship data before the parent edit record is fully refreshed.
+
+### FEMA Building Type Behavior
+
+The Structural Classification section includes:
+
+- FEMA Building Type
+- Seismicity Level
+
+The FEMA Building Type field persists to:
+
+```text
+structuralDetail.fema_building_type_id
+```
+
+Labels display:
+
+```text
+code - name
+```
+
+When `fema_version_id` is available in the form state, the building type options are filtered by that FEMA version. Otherwise, active FEMA building types are shown ordered by code.
+
+The `AssessmentStructuralDetail` model remains responsible for snapshotting selected FEMA Building Type descriptive values:
+
+- code
+- name
+- material category
+- structural system
+
+### Site / Soil
+
+The Site / Soil section includes:
+
+- Soil Type
+- Site Condition Notes
+
+Soil Type options use existing FEMA Level 1 score modifier codes already present in the seed data:
+
+```text
+SOIL_AB
+SOIL_E_LOW_RISE
+SOIL_E_MID_HIGH_RISE
+```
+
+### Irregularities
+
+Vertical Irregularity uses stable stored values:
+
+```text
+none
+moderate
+severe
+```
+
+Plan Irregularity uses stable stored values:
+
+```text
+none
+irregular
+```
+
+### Nullable Boolean Code Conditions
+
+The Code Conditions section includes:
+
+- Pre-Code Condition
+- Post-Benchmark Condition
+
+Both fields use Filament `Select::boolean()` with an Unknown placeholder so all three states are preserved:
+
+- Yes = `true`
+- No = `false`
+- Unknown / Not Yet Assessed = `null`
+
+A normal binary toggle was not used.
+
+### Structural Notes
+
+The Structural Notes section includes:
+
+- Structural Observation Notes
+
+Textareas are used for note fields.
+
+### Snapshot Display Behavior
+
+Snapshot fields are displayed as disabled, non-dehydrated form fields and as read-only infolist entries.
+
+The form/view display includes FEMA Version snapshots:
+
+- code
+- title
+- edition
+
+The form/view display includes FEMA Building Type snapshots:
+
+- code
+- name
+- material category
+- structural system
+
+Snapshot fields are not user-controlled. Tests confirm that user-submitted snapshot values are not persisted and model snapshot synchronization remains authoritative.
+
+### Table Behavior
+
+The main Assessment table was kept readable. Only two optional/toggleable structural summary columns were added:
+
+- FEMA Type
+- Seismicity
+
+Both are hidden by default.
+
+### Tests Added
+
+Added `tests/Feature/AssessmentStructuralDetailFilamentTest.php` covering:
+
+- Assessment edit form loads successfully with no structural detail
+- existing structural detail loads correctly
+- structural detail can be created from the Assessment create form
+- structural detail can be updated from the Assessment edit form
+- nullable boolean state can remain `null`
+- FEMA version is saved on Assessment and is not duplicated as an editable structural-detail foreign key
+- FEMA Building Type selection persists
+- snapshot fields are not directly user-controlled
+- changing Assessment FEMA Version refreshes structural detail FEMA version snapshots on the next save
+- existing Assessment creation behavior still works without structural detail
+
+### Checks / Tests Performed
+
+- `php -l app\Filament\Resources\Assessments\AssessmentResource.php`
+- `php -l app\Filament\Resources\Assessments\Pages\EditAssessment.php`
+- `php -l tests\Feature\AssessmentStructuralDetailFilamentTest.php`
+- `php artisan test tests\Feature\AssessmentStructuralDetailFilamentTest.php`
+- `php artisan test tests\Feature\AssessmentStructuralDetailTest.php`
+- `php artisan test tests\Feature\AssessmentBuildingSnapshotTest.php`
+- `php artisan test`
+
+Focused Filament UI test result:
+
+```text
+Tests: 6 passed (54 assertions)
+```
+
+Existing structural detail data-layer test result:
+
+```text
+Tests: 6 passed (26 assertions)
+```
+
+Existing building snapshot focused test result:
+
+```text
+Tests: 1 passed (34 assertions)
+```
+
+Full test result:
+
+```text
+Tests: 15 passed (116 assertions)
+```
+
+### Issues Encountered and Resolution
+
+- The initial test helper destructured an optional alternate FEMA Building Type when it was not requested.
+  - Resolution: adjusted the helper to read the optional value safely.
+- The first nullable boolean implementation did not reliably show the persisted `false` state in the edit form.
+  - Resolution: switched to Filament `Select::boolean('Yes', 'No', 'Unknown / Not Yet Assessed')`, which preserved `true`, `false`, and `null` cleanly.
+- Changing Assessment FEMA Version did not refresh existing structural detail version snapshots during the same edit save because of Filament parent/relationship save order.
+  - Resolution: added `EditAssessment::afterSave()` to refresh and save existing structural detail reference snapshots after the Assessment record has been saved.
+
+### Current Limitations
+
+- FEMA scoring engine is not implemented.
+- Basic Score lookup and Level 1 modifier lookup/application are not implemented.
+- Minimum-score handling and final score calculation are not implemented.
+- Workflow/completion validation is not implemented; Draft structural detail fields remain optional.
+- Findings, photos, recommendations, reports, roles/permissions, audit trail, dashboard, and GIS are not implemented.
+
+### Next Approved Development Step
+
+```text
+FEMA Basic Score and Level 1 modifier lookup integration
+```
+
+Do not proceed to the next development task until explicitly approved.
+
+---
+
+## Latest Project Status
+
+### Current Phase
+
+```text
+Assessment Structural Detail Filament UI
+```
+
+### Next Approved Development Step
+
+```text
+FEMA Basic Score and Level 1 modifier lookup integration
+```
+
+---
+
+## FEMA Basic Score and Level 1 Modifier Lookup Integration Log
+
+### Current Phase
+
+```text
+FEMA Basic Score and Level 1 Modifier Lookup Integration
+```
+
+### Files Created / Modified
+
+- `app/Services/Fema/FemaLevelOneScoreLookup.php`
+- `tests/Feature/FemaLevelOneScoreLookupTest.php`
+- `STATUS.md`
+- `DOCUMENTATION.md`
+
+### Implementation Completed
+
+Implemented a dedicated FEMA Level 1 lookup service for calculation preparation.
+
+The service is intentionally pure lookup/preparation logic. It does not persist scoring results, does not implement final workflow/status completion logic, does not implement Level 2 modifiers, and does not add reporting or Filament scoring UI.
+
+### Service Design
+
+Created:
+
+```text
+App\Services\Fema\FemaLevelOneScoreLookup
+```
+
+The service accepts an `Assessment` and returns a structured result containing:
+
+- readiness flag
+- missing input list
+- reference lookup errors
+- resolved Basic Score reference and value
+- resolved Minimum Score / S_MIN reference and value
+- resolved Level 1 modifier references
+- modifier codes
+- modifier values
+- Level 1 modifier total
+
+### Lookup Inputs
+
+The lookup service uses these existing assessment inputs:
+
+- `Assessment.fema_version_id`
+- `AssessmentStructuralDetail.fema_building_type_id`
+- `AssessmentStructuralDetail.seismicity_level`
+- `AssessmentStructuralDetail.soil_type`
+- `AssessmentStructuralDetail.vertical_irregularity_type`
+- `AssessmentStructuralDetail.plan_irregularity_type`
+- `AssessmentStructuralDetail.has_pre_code_condition`
+- `AssessmentStructuralDetail.has_post_benchmark_condition`
+- `AssessmentBuildingSnapshot.number_of_storeys_snapshot`
+
+The service does not use the live Building Registry for storey-based soil modifier handling.
+
+### Basic Score Lookup
+
+Basic Score is resolved from `fema_basic_scores` using:
+
+```text
+fema_version_id
+fema_building_type_id
+seismicity_level
+is_active = true
+```
+
+### Minimum Score Lookup
+
+Minimum Score / `S_MIN` is resolved from `fema_minimum_scores` using:
+
+```text
+fema_version_id
+fema_building_type_id
+seismicity_level
+is_active = true
+```
+
+### Level 1 Modifier Mappings
+
+The service maps structural detail inputs to the existing FEMA modifier codes:
+
+- `vertical_irregularity_type = severe` -> `VERTICAL_SEVERE`
+- `vertical_irregularity_type = moderate` -> `VERTICAL_MODERATE`
+- `plan_irregularity_type = irregular` -> `PLAN_IRREGULARITY`
+- `has_pre_code_condition === true` -> `PRE_CODE`
+- `has_post_benchmark_condition === true` -> `POST_BENCHMARK`
+- `soil_type = SOIL_AB` -> `SOIL_AB`
+- `soil_type = SOIL_E_LOW_RISE` or `SOIL_E_MID_HIGH_RISE` -> resolved using historical snapshot storeys:
+  - 1 to 3 storeys -> `SOIL_E_LOW_RISE`
+  - more than 3 storeys -> `SOIL_E_MID_HIGH_RISE`
+
+### Incomplete Draft Handling
+
+Incomplete Draft assessments are handled safely.
+
+When required inputs are missing, the service returns `ready = false` and reports missing inputs instead of throwing unnecessary runtime errors.
+
+Required lookup inputs are:
+
+- `assessment.fema_version_id`
+- `assessment.structuralDetail`
+- `structuralDetail.fema_building_type_id`
+- `structuralDetail.seismicity_level`
+
+Historical storey count is required only when Soil E modifier mapping is needed.
+
+### Reference Data Error Handling
+
+The service detects and reports:
+
+- missing Basic Score rows
+- missing Minimum Score rows
+- missing selected modifier rows
+- ambiguous Basic Score rows
+- ambiguous Minimum Score rows
+- ambiguous selected modifier rows
+- selected modifier rows marked not applicable
+- unsupported soil type values
+
+It does not silently choose an arbitrary reference row when multiple matches are found.
+
+### Tests Added
+
+Added `tests/Feature/FemaLevelOneScoreLookupTest.php` covering:
+
+- correct Basic Score lookup
+- correct Minimum Score lookup
+- no irregularity modifiers
+- moderate vertical irregularity modifier lookup
+- severe vertical irregularity modifier lookup
+- plan irregularity modifier lookup
+- pre-code condition modifier lookup
+- post-benchmark condition modifier lookup
+- combined Level 1 modifiers and modifier total
+- soil modifier lookup using historical snapshot storeys
+- missing required structural inputs
+- missing FEMA reference data
+- duplicate/ambiguous reference match handling
+
+### Checks / Tests Performed
+
+- `php -l app\Services\Fema\FemaLevelOneScoreLookup.php`
+- `php -l tests\Feature\FemaLevelOneScoreLookupTest.php`
+- `php artisan test tests\Feature\FemaLevelOneScoreLookupTest.php`
+- `php artisan test tests\Feature\AssessmentStructuralDetailTest.php`
+- `php artisan test tests\Feature\AssessmentStructuralDetailFilamentTest.php`
+- `php artisan test tests\Feature\AssessmentBuildingSnapshotTest.php`
+- `php artisan test`
+
+Focused FEMA lookup test result:
+
+```text
+Tests: 12 passed (48 assertions)
+```
+
+Existing structural detail data-layer test result:
+
+```text
+Tests: 6 passed (26 assertions)
+```
+
+Existing structural detail Filament test result:
+
+```text
+Tests: 6 passed (54 assertions)
+```
+
+Existing building snapshot focused test result:
+
+```text
+Tests: 1 passed (34 assertions)
+```
+
+Full test result:
+
+```text
+Tests: 27 passed (164 assertions)
+```
+
+### Issues Encountered and Resolution
+
+- The sandbox helper intermittently failed to acquire its Windows lock directory during file reads, syntax checks, and documentation edits.
+  - Resolution: used narrow elevated reads/writes/checks for the declared files and verification commands.
+- No FEMA reference-data mismatches were found by the new lookup tests.
+- No Laravel syntax or PHPUnit failures remained after implementation.
+
+### Current Limitations
+
+- Level 2 modifier lookup/application is not implemented yet.
+- Final FEMA score calculation is not implemented yet.
+- Minimum-score enforcement against a calculated score is not implemented yet.
+- Persisted Basic Score snapshots, Minimum Score snapshots, applied modifier snapshots, modifier totals, final score, and calculation trace are not implemented yet.
+- No Filament scoring display was added in this task.
+- Workflow/status completion validation remains pending.
+
+### Next Approved Development Step
+
+```text
+Persisted scoring snapshot structure and calculation trace design
+```
+
+Do not proceed to the next development task until explicitly approved.
+
+---
+
+## Latest Project Status
+
+### Current Phase
+
+```text
+FEMA Basic Score and Level 1 Modifier Lookup Integration
+```
+
+### Next Approved Development Step
+
+```text
+Persisted scoring snapshot structure and calculation trace design
+```
+
+
+---
+
+## Persisted FEMA Level 1 Scoring Snapshots and Calculation Trace Log
+
+### Current Phase
+
+```text
+Persisted FEMA Level 1 Scoring Snapshots and Calculation Trace
+```
+
+### Files Created / Modified
+
+- `database/migrations/2026_09_21_000000_add_level_one_scoring_snapshots_to_assessment_structural_details_table.php`
+- `app/Models/AssessmentStructuralDetail.php`
+- `app/Services/Fema/FemaLevelOneScoreSnapshotter.php`
+- `tests/Feature/FemaLevelOneScoreSnapshotTest.php`
+- `STATUS.md`
+- `DOCUMENTATION.md`
+
+### Implementation Completed
+
+Implemented persisted FEMA Level 1 scoring snapshots and a readable calculation trace.
+
+The implementation keeps Level 1 scoring snapshots close to `AssessmentStructuralDetail`, because the existing architecture stores the assessment-specific FEMA structural inputs there and already has a one-to-one relationship with `Assessment`.
+
+No Level 2 scoring, workflow/status completion logic, report generation, or major Filament redesign was implemented in this task.
+
+### Database Changes
+
+Added these nullable columns to `assessment_structural_details`:
+
+```text
+fema_basic_score_id
+basic_score_snapshot
+fema_minimum_score_id
+minimum_score_snapshot
+level_one_modifier_total_snapshot
+calculated_level_one_score
+final_level_one_score
+applied_level_one_modifiers_snapshot
+level_one_calculation_trace
+level_one_calculated_at
+```
+
+### Foreign Keys / Indexes
+
+- `fema_basic_score_id` references `fema_basic_scores.id` and uses `restrictOnDelete()`.
+- `fema_minimum_score_id` references `fema_minimum_scores.id` and uses `restrictOnDelete()`.
+- Indexes were added for:
+  - `fema_basic_score_id`
+  - `fema_minimum_score_id`
+  - `level_one_calculated_at`
+
+### Model Updates
+
+Updated `AssessmentStructuralDetail` fillable fields and casts.
+
+New casts:
+
+```text
+basic_score_snapshot => decimal:2
+minimum_score_snapshot => decimal:2
+level_one_modifier_total_snapshot => decimal:2
+calculated_level_one_score => decimal:2
+final_level_one_score => decimal:2
+applied_level_one_modifiers_snapshot => array
+level_one_calculation_trace => array
+level_one_calculated_at => datetime
+```
+
+New relationships:
+
+```php
+public function femaBasicScore(): BelongsTo
+public function femaMinimumScore(): BelongsTo
+```
+
+### Snapshot Service
+
+Created:
+
+```text
+App\Services\Fema\FemaLevelOneScoreSnapshotter
+```
+
+The service uses the existing `FemaLevelOneScoreLookup` result. It only persists when the lookup result is ready.
+
+If the lookup is incomplete or has reference errors, the service returns `persisted = false` and does not write scoring snapshots.
+
+### Calculation Rule
+
+The Level 1 score is calculated as:
+
+```text
+calculated_level_one_score = basic_score + level_one_modifier_total
+```
+
+Then the FEMA minimum score is applied as a floor:
+
+```text
+final_level_one_score = max(calculated_level_one_score, minimum_score)
+```
+
+### Historical Integrity
+
+The persisted result does not depend on live FEMA reference values for future display.
+
+The implementation snapshots:
+
+- Basic Score reference ID
+- Basic Score numeric value
+- Minimum Score reference ID
+- Minimum Score numeric value
+- Level 1 modifier total
+- calculated Level 1 score before minimum-score handling
+- final Level 1 score after minimum-score handling
+- applied modifier details
+- calculation trace metadata
+- calculation timestamp
+
+Applied modifier snapshots include:
+
+```text
+reference_id
+fema_version_id
+fema_building_type_id
+seismicity_level
+assessment_level
+category
+code
+name
+value
+is_applicable
+```
+
+### Calculation Trace
+
+The JSON calculation trace stores:
+
+- assessment ID
+- assessment number
+- calculated timestamp
+- FEMA version and building type input context
+- seismicity, soil, irregularity, and code-condition inputs
+- historical storey count from `assessment_building_snapshots`
+- Basic Score reference and value
+- applied modifier snapshots
+- modifier total
+- calculated Level 1 score
+- Minimum Score reference and value
+- whether the minimum-score floor was applied
+- final Level 1 score
+- formula text
+
+### Tests Added
+
+Added `tests/Feature/FemaLevelOneScoreSnapshotTest.php` covering:
+
+- successful Level 1 calculation persistence
+- persisted Basic Score and Minimum Score snapshots
+- persisted applied modifier snapshots
+- readable calculation trace
+- `level_one_calculated_at` timestamp
+- historical stability after FEMA reference values are changed later
+- minimum-score floor handling
+- incomplete lookup handling without persistence
+
+### Checks / Tests Performed
+
+- `php -l app\Models\AssessmentStructuralDetail.php`
+- `php -l app\Services\Fema\FemaLevelOneScoreSnapshotter.php`
+- `php -l database\migrations\2026_09_21_000000_add_level_one_scoring_snapshots_to_assessment_structural_details_table.php`
+- `php -l tests\Feature\FemaLevelOneScoreSnapshotTest.php`
+- `php artisan migrate`
+- `php artisan test tests\Feature\FemaLevelOneScoreSnapshotTest.php`
+- `php artisan test tests\Feature\FemaLevelOneScoreLookupTest.php`
+- `php artisan test tests\Feature\AssessmentStructuralDetailTest.php`
+- `php artisan test tests\Feature\AssessmentStructuralDetailFilamentTest.php`
+- `php artisan test tests\Feature\AssessmentBuildingSnapshotTest.php`
+- `php artisan test`
+- `php artisan migrate:status`
+
+Focused Level 1 scoring snapshot test result:
+
+```text
+Tests: 4 passed (21 assertions)
+```
+
+Existing FEMA lookup test result:
+
+```text
+Tests: 12 passed (48 assertions)
+```
+
+Existing structural detail data-layer test result:
+
+```text
+Tests: 6 passed (26 assertions)
+```
+
+Existing structural detail Filament test result:
+
+```text
+Tests: 6 passed (54 assertions)
+```
+
+Existing building snapshot focused test result:
+
+```text
+Tests: 1 passed (34 assertions)
+```
+
+Full test result:
+
+```text
+Tests: 31 passed (185 assertions)
+```
+
+### Migration Result
+
+```text
+2026_09_21_000000_add_level_one_scoring_snapshots_to_assessment_structural_details_table [11] Ran
+```
+
+### Issues Encountered and Resolution
+
+- The sandbox helper intermittently failed to acquire its Windows lock directory during reads and edits.
+  - Resolution: used narrow elevated reads/writes/checks for declared files and verification commands.
+- No FEMA reference-data issues were found by the scoring snapshot tests.
+- No Laravel migration, syntax, or PHPUnit failures remained after implementation.
+
+### Current Limitations
+
+- Level 1 scoring snapshots are persisted by service only; no Filament calculate action or read-only scoring display has been added yet.
+- Level 2 modifier lookup/application is not implemented yet.
+- Final scoring workflow/status completion validation is not implemented yet.
+- Report generation is not implemented yet.
+- Existing assessments were not backfilled with Level 1 score snapshots.
+
+### Next Approved Development Step
+
+```text
+Assessment Filament read-only Level 1 score display and explicit calculate/refresh action
+```
+
+Do not proceed to the next development task until explicitly approved.
+
+---
+
+## Latest Project Status
+
+### Current Phase
+
+```text
+Persisted FEMA Level 1 Scoring Snapshots and Calculation Trace
+```
+
+### Next Approved Development Step
+
+```text
+Assessment Filament read-only Level 1 score display and explicit calculate/refresh action
+```
+
+
+---
+
+## Assessment Filament Level 1 Score Summary and Calculate Action Log
+
+### Current Phase
+
+```text
+Assessment Filament Level 1 Score Summary and Calculate Action
+```
+
+### Files Created / Modified
+
+- `app/Filament/Resources/Assessments/AssessmentResource.php`
+- `app/Filament/Resources/Assessments/Pages/EditAssessment.php`
+- `app/Filament/Resources/Assessments/Pages/ViewAssessment.php`
+- `app/Filament/Resources/Assessments/Pages/Concerns/CalculatesLevelOneScore.php`
+- `app/Models/AssessmentStructuralDetail.php`
+- `tests/Feature/AssessmentLevelOneScoreFilamentTest.php`
+- `STATUS.md`
+- `DOCUMENTATION.md`
+
+### Implementation Completed
+
+Implemented the Assessment Filament read-only FEMA Level 1 Score Summary and explicit Calculate / Refresh Score action.
+
+This task is Filament UI integration only. It does not implement Level 2 scoring, workflow/status completion locking, automatic recalculation on every save, or report generation.
+
+### UI Placement
+
+Added a dedicated read-only section:
+
+```text
+FEMA Level 1 Score Summary
+```
+
+The section appears in the Assessment edit form and Assessment view/infolist after the structural/FEMA sections and before Status and Remarks.
+
+### Score Summary Display
+
+The summary uses persisted score snapshot values from `AssessmentStructuralDetail`, not live FEMA reference values.
+
+Displayed values include:
+
+- Basic Score
+- Applied Level 1 Modifiers
+- Level 1 Modifier Total
+- Calculated Level 1 Score
+- Minimum Score
+- Final Level 1 Score
+- Last Calculated At
+- Compact Calculation Details
+
+If no Level 1 score has been calculated, the summary displays:
+
+```text
+No Level 1 score has been calculated yet.
+```
+
+### Applied Modifier Display
+
+Applied modifiers are rendered from `applied_level_one_modifiers_snapshot` only.
+
+Each applied modifier is shown with:
+
+```text
+code - name - signed value
+```
+
+Example format:
+
+```text
+VERTICAL_MODERATE - Moderate Vertical Irregularity - -0.60
+POST_BENCHMARK - Post-Benchmark - +2.40
+```
+
+Unused modifiers are not displayed.
+
+### Calculation Details Display
+
+The raw JSON trace is not exposed directly.
+
+The visible calculation details summarize the persisted trace as:
+
+```text
+Basic Score + Level 1 Modifier Total = Calculated Score
+Final Level 1 Score = max(Calculated Score, Minimum Score)
+```
+
+### Explicit Calculate / Refresh Action
+
+Added a shared page action through:
+
+```text
+App\Filament\Resources\Assessments\Pages\Concerns\CalculatesLevelOneScore
+```
+
+The action is available on both the Assessment edit and view pages.
+
+The label is dynamic:
+
+- `Calculate Level 1 Score` when no persisted Level 1 score exists
+- `Refresh Level 1 Score` when a persisted Level 1 score exists
+
+The action delegates calculation and persistence to:
+
+```text
+App\Services\Fema\FemaLevelOneScoreSnapshotter
+```
+
+No scoring logic was duplicated inside Filament resources or pages.
+
+### Action Behavior
+
+When the action runs:
+
+- if lookup/calculation is ready:
+  - persists or updates the Level 1 score snapshot
+  - refreshes the page record/form state
+  - shows a success notification
+- if required inputs are missing:
+  - does not persist a completed score
+  - shows a warning notification listing missing inputs
+- if lookup errors exist:
+  - does not persist a completed score
+  - shows a warning notification listing lookup errors
+- if an unexpected exception occurs:
+  - shows a generic danger notification
+  - does not expose internal stack traces to the user
+
+### Read-Only Protection
+
+The Filament UI does not expose editable score fields.
+
+Score snapshot columns were removed from `AssessmentStructuralDetail::$fillable`; the snapshotter writes them using `forceFill()`. This keeps user-submitted form state from mass-assigning persisted score snapshots.
+
+### Recalculation
+
+Recalculation is allowed while the Assessment remains editable/Draft.
+
+The action replaces/updates the existing persisted Level 1 score snapshot using the existing snapshotter behavior.
+
+No status-based locking was added.
+
+### Stale Score Note
+
+Complex stale-score change tracking was not added in this task. The UI provides an explicit Refresh Level 1 Score action after a score exists. More detailed stale detection can be added later if the project introduces input-change tracking timestamps or score invalidation metadata.
+
+### Tests Added
+
+Added `tests/Feature/AssessmentLevelOneScoreFilamentTest.php` covering:
+
+- score summary renders when a persisted score exists
+- empty state renders when no score exists
+- calculate action calls the score snapshotter
+- score values refresh after calculation
+- applied modifiers display from persisted snapshots
+- missing required inputs do not persist a completed score
+- lookup errors do not persist a completed score
+- recalculation updates the persisted score
+- score fields remain read-only on Assessment form save
+
+### Checks / Tests Performed
+
+- `php -l app\Filament\Resources\Assessments\AssessmentResource.php`
+- `php -l app\Filament\Resources\Assessments\Pages\Concerns\CalculatesLevelOneScore.php`
+- `php -l app\Filament\Resources\Assessments\Pages\EditAssessment.php`
+- `php -l app\Filament\Resources\Assessments\Pages\ViewAssessment.php`
+- `php -l app\Models\AssessmentStructuralDetail.php`
+- `php -l tests\Feature\AssessmentLevelOneScoreFilamentTest.php`
+- `php artisan test tests\Feature\AssessmentLevelOneScoreFilamentTest.php`
+- `php artisan test tests\Feature\FemaLevelOneScoreLookupTest.php`
+- `php artisan test tests\Feature\FemaLevelOneScoreSnapshotTest.php`
+- `php artisan test tests\Feature\AssessmentStructuralDetailTest.php`
+- `php artisan test tests\Feature\AssessmentStructuralDetailFilamentTest.php`
+- `php artisan test tests\Feature\AssessmentBuildingSnapshotTest.php`
+- `php artisan test`
+
+Focused Filament score summary test result:
+
+```text
+Tests: 9 passed (40 assertions)
+```
+
+Existing FEMA lookup test result:
+
+```text
+Tests: 12 passed (48 assertions)
+```
+
+Existing FEMA score snapshot test result:
+
+```text
+Tests: 4 passed (21 assertions)
+```
+
+Existing structural detail data-layer test result:
+
+```text
+Tests: 6 passed (26 assertions)
+```
+
+Existing structural detail Filament test result:
+
+```text
+Tests: 6 passed (54 assertions)
+```
+
+Existing building snapshot focused test result:
+
+```text
+Tests: 1 passed (34 assertions)
+```
+
+Full test result:
+
+```text
+Pending final run for this task.
+```
+
+### Issues Encountered and Resolution
+
+- Filament `TextEntry` attempted to format JSON array leaves directly when entries pointed at JSON columns.
+  - Resolution: changed applied modifier and calculation detail display entries to format from the Assessment record while using existing non-null assessment fields as display anchors.
+- Arbitrary display-only state names did not render consistently when no state existed.
+  - Resolution: anchored computed read-only entries to existing Assessment fields and formatted from the Assessment record.
+- The sandbox helper intermittently failed to acquire its Windows lock directory during reads and edits.
+  - Resolution: used narrow elevated reads/writes/checks for declared files and verification commands.
+
+### Current Limitations
+
+- Level 2 modifier lookup/application is not implemented yet.
+- Workflow/status completion validation and locking are not implemented yet.
+- Final report output is not implemented yet.
+- Complex stale-score detection is not implemented yet.
+- Existing assessments were not backfilled with Level 1 score snapshots.
+
+### Next Approved Development Step
+
+```text
+Level 2 modifier lookup/application design
+```
+
+Do not proceed to the next development task until explicitly approved.
+
+---
+
+## Latest Project Status
+
+### Current Phase
+
+```text
+Assessment Filament Level 1 Score Summary and Calculate Action
+```
+
+### Next Approved Development Step
+
+```text
+Level 2 modifier lookup/application design
 ```

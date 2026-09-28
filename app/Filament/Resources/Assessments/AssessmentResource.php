@@ -7,7 +7,10 @@ use App\Filament\Resources\Assessments\Pages\EditAssessment;
 use App\Filament\Resources\Assessments\Pages\ListAssessments;
 use App\Filament\Resources\Assessments\Pages\ViewAssessment;
 use App\Models\Assessment;
+use App\Models\AssessmentStructuralDetail;
 use App\Models\Building;
+use App\Models\FemaBuildingType;
+use App\Models\FemaVersion;
 use BackedEnum;
 use UnitEnum;
 use Filament\Actions\EditAction;
@@ -20,10 +23,12 @@ use Filament\Forms\Components\TimePicker;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class AssessmentResource extends Resource
 {
@@ -47,8 +52,8 @@ class AssessmentResource extends Resource
     {
         return $schema
             ->components([
-                Section::make('Assessment Identification')
-                    ->description('Assessment identity and linked building record.')
+                Section::make('Assessment Information')
+                    ->description('Assessment identity, linked building, FEMA version, and core event details.')
                     ->schema([
                         TextInput::make('assessment_number')
                             ->label('Assessment Number')
@@ -69,12 +74,6 @@ class AssessmentResource extends Resource
                             ->searchable(['building_code', 'building_name'])
                             ->forceSearchCaseInsensitive()
                             ->preload(),
-                    ])
-                    ->columns(2),
-
-                Section::make('Assessment Details')
-                    ->description('Core assessment date, level, type, and assigned assessor.')
-                    ->schema([
                         DatePicker::make('assessment_date')
                             ->label('Assessment Date')
                             ->required(),
@@ -100,9 +99,130 @@ class AssessmentResource extends Resource
                                 'Level 1' => 'Level 1',
                                 'Level 2' => 'Level 2',
                             ]),
+                        Select::make('fema_version_id')
+                            ->label('FEMA Version')
+                            ->options(fn (): array => static::femaVersionOptions())
+                            ->searchable()
+                            ->preload(),
                     ])
                     ->columns(2),
 
+                Section::make('FEMA Classification')
+                    ->relationship(
+                        'structuralDetail',
+                        condition: fn (?array $state): bool => static::structuralDetailHasInput($state),
+                    )
+                    ->schema([
+                        Select::make('fema_building_type_id')
+                            ->label('FEMA Building Type')
+                            ->options(fn (Get $get): array => static::femaBuildingTypeOptions($get('../../fema_version_id')))
+                            ->searchable()
+                            ->preload(),
+                        Select::make('seismicity_level')
+                            ->label('Seismicity Level')
+                            ->options(static::seismicityLevelOptions()),
+                        TextInput::make('fema_version_code_snapshot')
+                            ->label('FEMA Version Code Snapshot')
+                            ->disabled()
+                            ->dehydrated(false)
+                            ->placeholder('Captured on save'),
+                        TextInput::make('fema_version_title_snapshot')
+                            ->label('FEMA Version Title Snapshot')
+                            ->disabled()
+                            ->dehydrated(false)
+                            ->placeholder('Captured on save'),
+                        TextInput::make('fema_version_edition_snapshot')
+                            ->label('FEMA Version Edition Snapshot')
+                            ->disabled()
+                            ->dehydrated(false)
+                            ->placeholder('Captured on save'),
+                        TextInput::make('fema_building_type_code_snapshot')
+                            ->label('Building Type Code Snapshot')
+                            ->disabled()
+                            ->dehydrated(false)
+                            ->placeholder('Captured on save'),
+                        TextInput::make('fema_building_type_name_snapshot')
+                            ->label('Building Type Name Snapshot')
+                            ->disabled()
+                            ->dehydrated(false)
+                            ->placeholder('Captured on save'),
+                        TextInput::make('material_category_snapshot')
+                            ->label('Material Category Snapshot')
+                            ->disabled()
+                            ->dehydrated(false)
+                            ->placeholder('Captured on save'),
+                        TextInput::make('structural_system_snapshot')
+                            ->label('Structural System Snapshot')
+                            ->disabled()
+                            ->dehydrated(false)
+                            ->placeholder('Captured on save'),
+                    ])
+                    ->columns(2),
+
+                Section::make('Site / Soil')
+                    ->relationship(
+                        'structuralDetail',
+                        condition: fn (?array $state): bool => static::structuralDetailHasInput($state),
+                    )
+                    ->schema([
+                        Select::make('soil_type')
+                            ->label('Soil Type')
+                            ->options(static::soilTypeOptions()),
+                        Textarea::make('site_condition_notes')
+                            ->label('Site Condition Notes')
+                            ->rows(3)
+                            ->maxLength(65535)
+                            ->columnSpanFull(),
+                    ])
+                    ->columns(2),
+
+                Section::make('Irregularities')
+                    ->relationship(
+                        'structuralDetail',
+                        condition: fn (?array $state): bool => static::structuralDetailHasInput($state),
+                    )
+                    ->schema([
+                        Select::make('vertical_irregularity_type')
+                            ->label('Vertical Irregularity')
+                            ->options(static::verticalIrregularityOptions()),
+                        Select::make('plan_irregularity_type')
+                            ->label('Plan Irregularity')
+                            ->options(static::planIrregularityOptions()),
+                    ])
+                    ->columns(2),
+
+                Section::make('Code Conditions')
+                    ->relationship(
+                        'structuralDetail',
+                        condition: fn (?array $state): bool => static::structuralDetailHasInput($state),
+                    )
+                    ->schema([
+                        Select::make('has_pre_code_condition')
+                            ->label('Pre-Code Condition')
+                            ->boolean('Yes', 'No', 'Unknown / Not Yet Assessed'),
+                        Select::make('has_post_benchmark_condition')
+                            ->label('Post-Benchmark Condition')
+                            ->boolean('Yes', 'No', 'Unknown / Not Yet Assessed'),
+                    ])
+                    ->columns(2),
+
+                Section::make('Structural Notes')
+                    ->relationship(
+                        'structuralDetail',
+                        condition: fn (?array $state): bool => static::structuralDetailHasInput($state),
+                    )
+                    ->schema([
+                        Textarea::make('structural_observation_notes')
+                            ->label('Structural Observation Notes')
+                            ->rows(4)
+                            ->maxLength(65535)
+                            ->columnSpanFull(),
+                    ]),
+
+                Section::make('FEMA Level 1 Score Summary')
+                    ->description('Read-only persisted Level 1 scoring snapshot. Use the page action to calculate or refresh it.')
+                    ->schema(static::levelOneScoreSummarySchema())
+                    ->columns(2),
                 Section::make('Status and Remarks')
                     ->description('Basic assessment status only. Workflow actions are not implemented yet.')
                     ->schema([
@@ -125,18 +245,13 @@ class AssessmentResource extends Resource
     {
         return $schema
             ->components([
-                Section::make('Assessment Identification')
+                Section::make('Assessment Information')
                     ->schema([
                         TextEntry::make('assessment_number')
                             ->label('Assessment Number'),
                         TextEntry::make('building.building_name')
                             ->label('Building')
                             ->formatStateUsing(fn (Assessment $record): string => "{$record->building?->building_code} - {$record->building?->building_name}"),
-                    ])
-                    ->columns(2),
-
-                Section::make('Assessment Details')
-                    ->schema([
                         TextEntry::make('assessment_date')
                             ->label('Assessment Date')
                             ->date(),
@@ -151,9 +266,80 @@ class AssessmentResource extends Resource
                             ->label('Assessment Type'),
                         TextEntry::make('assessment_level')
                             ->label('Assessment Level'),
+                        TextEntry::make('femaVersion.code')
+                            ->label('FEMA Version')
+                            ->formatStateUsing(fn (Assessment $record): string => $record->femaVersion ? static::femaVersionLabel($record->femaVersion) : '-')
+                            ->placeholder('-'),
                     ])
                     ->columns(2),
 
+                Section::make('Structural Detail')
+                    ->schema([
+                        TextEntry::make('structuralDetail.femaBuildingType.code')
+                            ->label('FEMA Building Type')
+                            ->formatStateUsing(fn (Assessment $record): string => $record->structuralDetail?->femaBuildingType ? static::femaBuildingTypeLabel($record->structuralDetail->femaBuildingType) : '-')
+                            ->placeholder('-'),
+                        TextEntry::make('structuralDetail.seismicity_level')
+                            ->label('Seismicity Level')
+                            ->placeholder('-'),
+                        TextEntry::make('structuralDetail.soil_type')
+                            ->label('Soil Type')
+                            ->formatStateUsing(fn (?string $state): string => static::soilTypeOptions()[$state] ?? ($state ?: '-'))
+                            ->placeholder('-'),
+                        TextEntry::make('structuralDetail.vertical_irregularity_type')
+                            ->label('Vertical Irregularity')
+                            ->formatStateUsing(fn (?string $state): string => static::verticalIrregularityOptions()[$state] ?? ($state ?: '-'))
+                            ->placeholder('-'),
+                        TextEntry::make('structuralDetail.plan_irregularity_type')
+                            ->label('Plan Irregularity')
+                            ->formatStateUsing(fn (?string $state): string => static::planIrregularityOptions()[$state] ?? ($state ?: '-'))
+                            ->placeholder('-'),
+                        TextEntry::make('structuralDetail.has_pre_code_condition')
+                            ->label('Pre-Code Condition')
+                            ->formatStateUsing(fn (mixed $state): string => static::nullableBooleanLabel($state)),
+                        TextEntry::make('structuralDetail.has_post_benchmark_condition')
+                            ->label('Post-Benchmark Condition')
+                            ->formatStateUsing(fn (mixed $state): string => static::nullableBooleanLabel($state)),
+                        TextEntry::make('structuralDetail.site_condition_notes')
+                            ->label('Site Condition Notes')
+                            ->placeholder('-')
+                            ->columnSpanFull(),
+                        TextEntry::make('structuralDetail.structural_observation_notes')
+                            ->label('Structural Observation Notes')
+                            ->placeholder('-')
+                            ->columnSpanFull(),
+                    ])
+                    ->columns(2),
+
+                Section::make('Structural Reference Snapshots')
+                    ->schema([
+                        TextEntry::make('structuralDetail.fema_version_code_snapshot')
+                            ->label('FEMA Version Code')
+                            ->placeholder('-'),
+                        TextEntry::make('structuralDetail.fema_version_title_snapshot')
+                            ->label('FEMA Version Title')
+                            ->placeholder('-'),
+                        TextEntry::make('structuralDetail.fema_version_edition_snapshot')
+                            ->label('FEMA Version Edition')
+                            ->placeholder('-'),
+                        TextEntry::make('structuralDetail.fema_building_type_code_snapshot')
+                            ->label('Building Type Code')
+                            ->placeholder('-'),
+                        TextEntry::make('structuralDetail.fema_building_type_name_snapshot')
+                            ->label('Building Type Name')
+                            ->placeholder('-'),
+                        TextEntry::make('structuralDetail.material_category_snapshot')
+                            ->label('Material Category')
+                            ->placeholder('-'),
+                        TextEntry::make('structuralDetail.structural_system_snapshot')
+                            ->label('Structural System')
+                            ->placeholder('-'),
+                    ])
+                    ->columns(2),
+
+                Section::make('FEMA Level 1 Score Summary')
+                    ->schema(static::levelOneScoreSummarySchema())
+                    ->columns(2),
                 Section::make('Status and Remarks')
                     ->schema([
                         TextEntry::make('status')
@@ -202,6 +388,14 @@ class AssessmentResource extends Resource
                     ->color(fn (?string $state): string => static::statusColor($state))
                     ->searchable()
                     ->sortable(),
+                TextColumn::make('structuralDetail.fema_building_type_code_snapshot')
+                    ->label('FEMA Type')
+                    ->placeholder('-')
+                    ->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('structuralDetail.seismicity_level')
+                    ->label('Seismicity')
+                    ->placeholder('-')
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('assessor.name')
                     ->label('Assessor')
                     ->placeholder('-')
@@ -242,6 +436,211 @@ class AssessmentResource extends Resource
         ];
     }
 
+    public static function femaVersionLabel(FemaVersion $femaVersion): string
+    {
+        return trim("{$femaVersion->code} - {$femaVersion->title} ({$femaVersion->edition})");
+    }
+
+    public static function femaBuildingTypeLabel(FemaBuildingType $femaBuildingType): string
+    {
+        return "{$femaBuildingType->code} - {$femaBuildingType->name}";
+    }
+
+    public static function soilTypeOptions(): array
+    {
+        return [
+            'SOIL_AB' => 'Soil Type A or B',
+            'SOIL_E_LOW_RISE' => 'Soil Type E - 1 to 3 Stories',
+            'SOIL_E_MID_HIGH_RISE' => 'Soil Type E - More Than 3 Stories',
+        ];
+    }
+
+    public static function verticalIrregularityOptions(): array
+    {
+        return [
+            'none' => 'None',
+            'moderate' => 'Moderate',
+            'severe' => 'Severe',
+        ];
+    }
+
+    public static function planIrregularityOptions(): array
+    {
+        return [
+            'none' => 'None',
+            'irregular' => 'Irregular',
+        ];
+    }
+
+    public static function seismicityLevelOptions(): array
+    {
+        return array_combine(
+            AssessmentStructuralDetail::SEISMICITY_LEVELS,
+            AssessmentStructuralDetail::SEISMICITY_LEVELS,
+        );
+    }
+
+    protected static function femaVersionOptions(): array
+    {
+        return FemaVersion::query()
+            ->where('is_active', true)
+            ->orderBy('code')
+            ->get()
+            ->mapWithKeys(fn (FemaVersion $femaVersion): array => [
+                $femaVersion->id => static::femaVersionLabel($femaVersion),
+            ])
+            ->all();
+    }
+
+    protected static function femaBuildingTypeOptions(mixed $femaVersionId = null): array
+    {
+        return FemaBuildingType::query()
+            ->when(
+                filled($femaVersionId),
+                fn (Builder $query) => $query->where('fema_version_id', $femaVersionId),
+            )
+            ->where('is_active', true)
+            ->orderBy('code')
+            ->get()
+            ->mapWithKeys(fn (FemaBuildingType $femaBuildingType): array => [
+                $femaBuildingType->id => static::femaBuildingTypeLabel($femaBuildingType),
+            ])
+            ->all();
+    }
+
+    protected static function levelOneScoreSummarySchema(): array
+    {
+        return [
+            TextEntry::make('assessment_number')
+                ->label('Score Status')
+                ->formatStateUsing(fn (Assessment $record): string => $record->structuralDetail?->level_one_calculated_at
+                    ? 'Level 1 score calculated'
+                    : 'No Level 1 score has been calculated yet.')
+                ->columnSpanFull(),
+            TextEntry::make('structuralDetail.basic_score_snapshot')
+                ->label('Basic Score')
+                ->formatStateUsing(fn (mixed $state): string => static::formatScoreValue($state))
+                ->placeholder('-'),
+            TextEntry::make('structuralDetail.minimum_score_snapshot')
+                ->label('Minimum Score')
+                ->formatStateUsing(fn (mixed $state): string => static::formatScoreValue($state))
+                ->placeholder('-'),
+            TextEntry::make('assessment_type')
+                ->label('Applied Level 1 Modifiers')
+                ->formatStateUsing(fn (Assessment $record): string => static::formatAppliedLevelOneModifiers($record->structuralDetail?->applied_level_one_modifiers_snapshot))
+                ->placeholder('No applied Level 1 modifiers.')
+                ->columnSpanFull(),
+            TextEntry::make('structuralDetail.level_one_modifier_total_snapshot')
+                ->label('Level 1 Modifier Total')
+                ->formatStateUsing(fn (mixed $state): string => static::formatSignedScoreValue($state))
+                ->placeholder('-'),
+            TextEntry::make('structuralDetail.calculated_level_one_score')
+                ->label('Calculated Level 1 Score')
+                ->formatStateUsing(fn (mixed $state): string => static::formatScoreValue($state))
+                ->placeholder('-'),
+            TextEntry::make('structuralDetail.final_level_one_score')
+                ->label('Final Level 1 Score')
+                ->formatStateUsing(fn (mixed $state): string => static::formatScoreValue($state))
+                ->placeholder('-'),
+            TextEntry::make('structuralDetail.level_one_calculated_at')
+                ->label('Last Calculated At')
+                ->dateTime()
+                ->placeholder('-'),
+            TextEntry::make('assessment_level')
+                ->label('Calculation Details')
+                ->formatStateUsing(fn (Assessment $record): string => static::formatLevelOneCalculationDetails($record->structuralDetail?->level_one_calculation_trace))
+                ->placeholder('-')
+                ->columnSpanFull(),
+        ];
+    }
+
+    public static function formatScoreValue(mixed $value): string
+    {
+        if ($value === null || $value === '') {
+            return '-';
+        }
+
+        return number_format((float) $value, 2, '.', '');
+    }
+
+    public static function formatSignedScoreValue(mixed $value): string
+    {
+        if ($value === null || $value === '') {
+            return '-';
+        }
+
+        $number = (float) $value;
+
+        return ($number >= 0 ? '+' : '') . number_format($number, 2, '.', '');
+    }
+
+    public static function formatAppliedLevelOneModifiers(mixed $modifiers): string
+    {
+        if (! is_array($modifiers) || $modifiers === []) {
+            return 'No applied Level 1 modifiers.';
+        }
+
+        return collect($modifiers)
+            ->map(function (array $modifier): string {
+                $code = $modifier['code'] ?? '-';
+                $name = $modifier['name'] ?? '-';
+                $value = static::formatSignedScoreValue($modifier['value'] ?? null);
+
+                return "{$code} - {$name} - {$value}";
+            })
+            ->implode("\n");
+    }
+
+    public static function formatLevelOneCalculationDetails(mixed $trace): string
+    {
+        if (! is_array($trace)) {
+            return '-';
+        }
+
+        $basicScore = static::formatScoreValue($trace['basic_score']['value'] ?? null);
+        $modifierTotal = static::formatSignedScoreValue($trace['modifier_total'] ?? null);
+        $calculatedScore = static::formatScoreValue($trace['calculated_level_one_score'] ?? null);
+        $minimumScore = static::formatScoreValue($trace['minimum_score']['value'] ?? null);
+        $finalScore = static::formatScoreValue($trace['final_level_one_score'] ?? null);
+
+        return "Basic Score {$basicScore} + Level 1 Modifier Total {$modifierTotal} = Calculated Score {$calculatedScore}\n"
+            . "Final Level 1 Score = max({$calculatedScore}, {$minimumScore}) = {$finalScore}";
+    }
+
+    protected static function nullableBooleanLabel(mixed $state): string
+    {
+        return match ($state) {
+            true, 1, '1' => 'Yes',
+            false, 0, '0' => 'No',
+            default => 'Unknown / Not Yet Assessed',
+        };
+    }
+
+    protected static function structuralDetailHasInput(?array $state): bool
+    {
+        if (! is_array($state)) {
+            return false;
+        }
+
+        foreach ([
+            'fema_building_type_id',
+            'seismicity_level',
+            'soil_type',
+            'vertical_irregularity_type',
+            'plan_irregularity_type',
+            'has_pre_code_condition',
+            'has_post_benchmark_condition',
+            'site_condition_notes',
+            'structural_observation_notes',
+        ] as $key) {
+            if (array_key_exists($key, $state) && $state[$key] !== null && $state[$key] !== '') {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     protected static function statusOptions(): array
     {
         return [
@@ -268,3 +667,11 @@ class AssessmentResource extends Resource
         };
     }
 }
+
+
+
+
+
+
+
+

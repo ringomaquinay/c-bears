@@ -108,9 +108,19 @@ class Assessment extends Model
         return $this->belongsTo(User::class, 'assessor_id');
     }
 
+    public function femaVersion(): BelongsTo
+    {
+        return $this->belongsTo(FemaVersion::class);
+    }
+
     public function buildingSnapshot(): HasOne
     {
         return $this->hasOne(AssessmentBuildingSnapshot::class);
+    }
+
+    public function structuralDetail(): HasOne
+    {
+        return $this->hasOne(AssessmentStructuralDetail::class);
     }
 
     public function createBuildingSnapshot(): AssessmentBuildingSnapshot
