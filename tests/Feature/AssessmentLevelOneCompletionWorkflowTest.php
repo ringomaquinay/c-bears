@@ -126,6 +126,42 @@ class AssessmentLevelOneCompletionWorkflowTest extends TestCase
             ->assertActionHidden('edit');
     }
 
+    public function test_view_page_complete_action_persists_completed_state_and_report_displays_completion(): void
+    {
+        Carbon::setTestNow('2026-09-29 15:30:00');
+
+        [$assessment] = $this->createScoringAssessment([
+            'vertical_irregularity_type' => 'moderate',
+            'plan_irregularity_type' => 'irregular',
+            'soil_type' => 'SOIL_E_MID_HIGH_RISE',
+            'has_pre_code_condition' => false,
+            'has_post_benchmark_condition' => true,
+        ]);
+
+        app(FemaLevelOneScoreSnapshotter::class)->calculateAndPersist($assessment);
+
+        Livewire::actingAs(User::factory()->create())
+            ->test(ViewAssessment::class, ['record' => $assessment->getKey()])
+            ->callAction('completeAssessment')
+            ->assertSuccessful();
+
+        $assessment->refresh();
+        $structuralDetail = $assessment->structuralDetail()->firstOrFail();
+
+        $this->assertSame('Completed', $assessment->status);
+        $this->assertSame('2026-09-29 15:30:00', $assessment->completed_at->format('Y-m-d H:i:s'));
+        $this->assertNotNull($structuralDetail->level_one_recommendation_code);
+        $this->assertNotNull($structuralDetail->level_one_recommendation_generated_at);
+
+        Livewire::actingAs(User::factory()->create())
+            ->test(ViewAssessmentReport::class, ['record' => $assessment->getKey()])
+            ->assertSuccessful()
+            ->assertSee('Completed')
+            ->assertSee('Sep 29, 2026 03:30 PM')
+            ->assertDontSee('DRAFT - This report preview is not finalized.')
+            ->assertDontSee('Completion Date</span><span class="cbears-report__value">Not recorded', false);
+    }
+
     public function test_completed_assessment_score_inputs_are_locked(): void
     {
         [$assessment, $structuralDetail] = $this->createCompletedAssessment();
@@ -271,3 +307,6 @@ class AssessmentLevelOneCompletionWorkflowTest extends TestCase
         parent::tearDown();
     }
 }
+
+
+

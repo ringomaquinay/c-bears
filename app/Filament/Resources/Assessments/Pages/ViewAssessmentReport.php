@@ -40,7 +40,9 @@ class ViewAssessmentReport extends ViewRecord
         /** @var Assessment $record */
         $record = $this->getRecord();
 
-        return $record->loadMissing([
+        $record->refresh();
+
+        return $record->load([
             'assessor',
             'buildingSnapshot',
             'structuralDetail',
@@ -145,3 +147,5 @@ class ViewAssessmentReport extends ViewRecord
         ];
     }
 }
+
+
