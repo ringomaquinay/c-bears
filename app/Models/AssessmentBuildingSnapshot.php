@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Validation\ValidationException;
 
 class AssessmentBuildingSnapshot extends Model
 {
@@ -34,6 +35,30 @@ class AssessmentBuildingSnapshot extends Model
             'year_built_snapshot' => 'integer',
             'approximate_floor_area_snapshot' => 'decimal:2',
         ];
+    }
+
+    protected static function booted(): void
+    {
+        static::updating(function (AssessmentBuildingSnapshot $snapshot): void {
+            $snapshot->preventCompletedAssessmentMutation();
+        });
+
+        static::deleting(function (AssessmentBuildingSnapshot $snapshot): void {
+            $snapshot->preventCompletedAssessmentMutation();
+        });
+    }
+
+    private function preventCompletedAssessmentMutation(): void
+    {
+        $assessment = $this->assessment()->first();
+
+        if (! $assessment?->isCompleted()) {
+            return;
+        }
+
+        throw ValidationException::withMessages([
+            'buildingSnapshot' => 'Completed assessment building snapshots are locked. Reopening requires a future administrative workflow.',
+        ]);
     }
 
     public function assessment(): BelongsTo

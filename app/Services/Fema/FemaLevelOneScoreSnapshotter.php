@@ -18,6 +18,18 @@ class FemaLevelOneScoreSnapshotter
 
     public function calculateAndPersist(Assessment $assessment): array
     {
+        if ($assessment->isCompleted()) {
+            return [
+                'persisted' => false,
+                'lookup' => [
+                    'ready' => false,
+                    'missing_inputs' => [],
+                    'errors' => ['assessment_completed'],
+                ],
+                'calculation' => null,
+            ];
+        }
+
         $lookup = $this->lookupService->lookup($assessment);
 
         if (! $lookup['ready']) {

@@ -15,6 +15,7 @@ trait CalculatesLevelOneScore
             ->label(fn (): string => $this->record->structuralDetail?->level_one_calculated_at
                 ? 'Refresh Level 1 Score'
                 : 'Calculate Level 1 Score')
+            ->disabled(fn (): bool => $this->record->isCompleted())
             ->action(function (FemaLevelOneScoreSnapshotter $snapshotter): void {
                 try {
                     $result = $snapshotter->calculateAndPersist($this->record->refresh());

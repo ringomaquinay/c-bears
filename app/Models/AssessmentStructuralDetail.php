@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Validation\ValidationException;
 
 class AssessmentStructuralDetail extends Model
 {
@@ -63,6 +64,8 @@ class AssessmentStructuralDetail extends Model
             'applied_level_one_modifiers_snapshot' => 'array',
             'level_one_calculation_trace' => 'array',
             'level_one_calculated_at' => 'datetime',
+            'level_one_screening_cutoff_snapshot' => 'decimal:2',
+            'level_one_recommendation_generated_at' => 'datetime',
             'has_pre_code_condition' => 'boolean',
             'has_post_benchmark_condition' => 'boolean',
         ];
@@ -71,8 +74,26 @@ class AssessmentStructuralDetail extends Model
     protected static function booted(): void
     {
         static::saving(function (AssessmentStructuralDetail $structuralDetail): void {
+            $structuralDetail->preventCompletedAssessmentMutation();
             $structuralDetail->syncReferenceSnapshots();
         });
+    }
+
+    private function preventCompletedAssessmentMutation(): void
+    {
+        if (! $this->exists || ! $this->isDirty()) {
+            return;
+        }
+
+        $assessment = $this->assessment()->first();
+
+        if (! $assessment?->isCompleted()) {
+            return;
+        }
+
+        throw ValidationException::withMessages([
+            'structuralDetail' => 'Completed assessments are locked. Reopening requires a future administrative workflow.',
+        ]);
     }
 
     public function assessment(): BelongsTo

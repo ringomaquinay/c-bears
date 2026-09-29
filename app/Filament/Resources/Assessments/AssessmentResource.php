@@ -6,6 +6,7 @@ use App\Filament\Resources\Assessments\Pages\CreateAssessment;
 use App\Filament\Resources\Assessments\Pages\EditAssessment;
 use App\Filament\Resources\Assessments\Pages\ListAssessments;
 use App\Filament\Resources\Assessments\Pages\ViewAssessment;
+use App\Filament\Resources\Assessments\Pages\ViewAssessmentReport;
 use App\Models\Assessment;
 use App\Models\AssessmentStructuralDetail;
 use App\Models\Building;
@@ -64,6 +65,7 @@ class AssessmentResource extends Resource
                             ->maxLength(255),
                         Select::make('building_id')
                             ->label('Building')
+                            ->disabled(fn (mixed $record): bool => static::isRecordCompleted($record))
                             ->required()
                             ->relationship(
                                 name: 'building',
@@ -76,17 +78,21 @@ class AssessmentResource extends Resource
                             ->preload(),
                         DatePicker::make('assessment_date')
                             ->label('Assessment Date')
+                            ->disabled(fn (mixed $record): bool => static::isRecordCompleted($record))
                             ->required(),
                         TimePicker::make('assessment_time')
                             ->label('Assessment Time')
+                            ->disabled(fn (mixed $record): bool => static::isRecordCompleted($record))
                             ->seconds(false),
                         Select::make('assessor_id')
                             ->label('Assessor')
+                            ->disabled(fn (mixed $record): bool => static::isRecordCompleted($record))
                             ->relationship('assessor', 'name')
                             ->searchable()
                             ->preload(),
                         Select::make('assessment_type')
                             ->label('Assessment Type')
+                            ->disabled(fn (mixed $record): bool => static::isRecordCompleted($record))
                             ->required()
                             ->options([
                                 'Initial' => 'Initial',
@@ -94,6 +100,7 @@ class AssessmentResource extends Resource
                             ]),
                         Select::make('assessment_level')
                             ->label('Assessment Level')
+                            ->disabled(fn (mixed $record): bool => static::isRecordCompleted($record))
                             ->required()
                             ->options([
                                 'Level 1' => 'Level 1',
@@ -101,6 +108,7 @@ class AssessmentResource extends Resource
                             ]),
                         Select::make('fema_version_id')
                             ->label('FEMA Version')
+                            ->disabled(fn (mixed $record): bool => static::isRecordCompleted($record))
                             ->options(fn (): array => static::femaVersionOptions())
                             ->searchable()
                             ->preload(),
@@ -115,11 +123,13 @@ class AssessmentResource extends Resource
                     ->schema([
                         Select::make('fema_building_type_id')
                             ->label('FEMA Building Type')
+                            ->disabled(fn (mixed $record): bool => static::isRecordCompleted($record))
                             ->options(fn (Get $get): array => static::femaBuildingTypeOptions($get('../../fema_version_id')))
                             ->searchable()
                             ->preload(),
                         Select::make('seismicity_level')
                             ->label('Seismicity Level')
+                            ->disabled(fn (mixed $record): bool => static::isRecordCompleted($record))
                             ->options(static::seismicityLevelOptions()),
                         TextInput::make('fema_version_code_snapshot')
                             ->label('FEMA Version Code Snapshot')
@@ -167,9 +177,11 @@ class AssessmentResource extends Resource
                     ->schema([
                         Select::make('soil_type')
                             ->label('Soil Type')
+                            ->disabled(fn (mixed $record): bool => static::isRecordCompleted($record))
                             ->options(static::soilTypeOptions()),
                         Textarea::make('site_condition_notes')
                             ->label('Site Condition Notes')
+                            ->disabled(fn (mixed $record): bool => static::isRecordCompleted($record))
                             ->rows(3)
                             ->maxLength(65535)
                             ->columnSpanFull(),
@@ -184,9 +196,11 @@ class AssessmentResource extends Resource
                     ->schema([
                         Select::make('vertical_irregularity_type')
                             ->label('Vertical Irregularity')
+                            ->disabled(fn (mixed $record): bool => static::isRecordCompleted($record))
                             ->options(static::verticalIrregularityOptions()),
                         Select::make('plan_irregularity_type')
                             ->label('Plan Irregularity')
+                            ->disabled(fn (mixed $record): bool => static::isRecordCompleted($record))
                             ->options(static::planIrregularityOptions()),
                     ])
                     ->columns(2),
@@ -199,9 +213,11 @@ class AssessmentResource extends Resource
                     ->schema([
                         Select::make('has_pre_code_condition')
                             ->label('Pre-Code Condition')
+                            ->disabled(fn (mixed $record): bool => static::isRecordCompleted($record))
                             ->boolean('Yes', 'No', 'Unknown / Not Yet Assessed'),
                         Select::make('has_post_benchmark_condition')
                             ->label('Post-Benchmark Condition')
+                            ->disabled(fn (mixed $record): bool => static::isRecordCompleted($record))
                             ->boolean('Yes', 'No', 'Unknown / Not Yet Assessed'),
                     ])
                     ->columns(2),
@@ -214,6 +230,7 @@ class AssessmentResource extends Resource
                     ->schema([
                         Textarea::make('structural_observation_notes')
                             ->label('Structural Observation Notes')
+                            ->disabled(fn (mixed $record): bool => static::isRecordCompleted($record))
                             ->rows(4)
                             ->maxLength(65535)
                             ->columnSpanFull(),
@@ -223,13 +240,18 @@ class AssessmentResource extends Resource
                     ->description('Read-only persisted Level 1 scoring snapshot. Use the page action to calculate or refresh it.')
                     ->schema(static::levelOneScoreSummarySchema())
                     ->columns(2),
+                Section::make('Screening Recommendation')
+                    ->description('Read-only FEMA P-154 Level 1 screening recommendation snapshot. This is not a safety certification.')
+                    ->schema(static::screeningRecommendationSchema())
+                    ->columns(2),
                 Section::make('Status and Remarks')
-                    ->description('Basic assessment status only. Workflow actions are not implemented yet.')
+                    ->description('Draft status is editable during assessment. Use workflow actions for completion.')
                     ->schema([
                         Select::make('status')
                             ->label('Status')
                             ->required()
-                            ->options(static::statusOptions())
+                            ->disabled(fn (mixed $record): bool => static::isRecordCompleted($record))
+                            ->options(fn (?Assessment $record): array => static::statusOptions($record?->isCompleted() ?? false))
                             ->default('Draft'),
                         Textarea::make('remarks')
                             ->label('Remarks')
@@ -340,6 +362,9 @@ class AssessmentResource extends Resource
                 Section::make('FEMA Level 1 Score Summary')
                     ->schema(static::levelOneScoreSummarySchema())
                     ->columns(2),
+                Section::make('Screening Recommendation')
+                    ->schema(static::screeningRecommendationSchema())
+                    ->columns(2),
                 Section::make('Status and Remarks')
                     ->schema([
                         TextEntry::make('status')
@@ -347,6 +372,10 @@ class AssessmentResource extends Resource
                             ->badge()
                             ->formatStateUsing(fn (?string $state): string => $state ?: '-')
                             ->color(fn (?string $state): string => static::statusColor($state)),
+                        TextEntry::make('completed_at')
+                            ->label('Completed At')
+                            ->dateTime()
+                            ->placeholder('-'),
                         TextEntry::make('remarks')
                             ->label('Remarks')
                             ->placeholder('-')
@@ -433,6 +462,7 @@ class AssessmentResource extends Resource
             'create' => CreateAssessment::route('/create'),
             'view' => ViewAssessment::route('/{record}'),
             'edit' => EditAssessment::route('/{record}/edit'),
+            'report' => ViewAssessmentReport::route('/{record}/report'),
         ];
     }
 
@@ -554,6 +584,31 @@ class AssessmentResource extends Resource
         ];
     }
 
+    protected static function screeningRecommendationSchema(): array
+    {
+        return [
+            TextEntry::make('structuralDetail.final_level_one_score')
+                ->label('Final Level 1 Score')
+                ->formatStateUsing(fn (mixed $state): string => static::formatScoreValue($state))
+                ->placeholder('-'),
+            TextEntry::make('structuralDetail.level_one_screening_cutoff_snapshot')
+                ->label('Screening Cutoff')
+                ->formatStateUsing(fn (mixed $state): string => static::formatScoreValue($state))
+                ->placeholder('-'),
+            TextEntry::make('assessment_number')
+                ->label('Recommendation')
+                ->formatStateUsing(fn (Assessment $record): string => $record->structuralDetail?->level_one_recommendation_label ?: 'Screening recommendation has not been generated yet.')
+                ->columnSpanFull(),
+            TextEntry::make('assessment_level')
+                ->label('Explanation')
+                ->formatStateUsing(fn (Assessment $record): string => $record->structuralDetail?->level_one_recommendation_explanation ?: 'Complete the Level 1 assessment to snapshot the screening recommendation.')
+                ->columnSpanFull(),
+            TextEntry::make('structuralDetail.level_one_recommendation_generated_at')
+                ->label('Recommendation Generated At')
+                ->dateTime()
+                ->placeholder('-'),
+        ];
+    }
     public static function formatScoreValue(mixed $value): string
     {
         if ($value === null || $value === '') {
@@ -607,6 +662,14 @@ class AssessmentResource extends Resource
             . "Final Level 1 Score = max({$calculatedScore}, {$minimumScore}) = {$finalScore}";
     }
 
+    protected static function isRecordCompleted(mixed $record): bool
+    {
+        if ($record instanceof Assessment) {
+            return $record->isCompleted();
+        }
+
+        return $record?->assessment?->isCompleted() ?? false;
+    }
     protected static function nullableBooleanLabel(mixed $state): string
     {
         return match ($state) {
@@ -641,17 +704,22 @@ class AssessmentResource extends Resource
         return false;
     }
 
-    protected static function statusOptions(): array
+    protected static function statusOptions(bool $includeCompleted = true): array
     {
-        return [
+        $options = [
             'Draft' => 'Draft',
             'For Review' => 'For Review',
             'Reviewed' => 'Reviewed',
-            'Completed' => 'Completed',
             'Returned' => 'Returned',
             'Cancelled' => 'Cancelled',
             'Incomplete' => 'Incomplete',
         ];
+
+        if ($includeCompleted) {
+            $options['Completed'] = 'Completed';
+        }
+
+        return $options;
     }
 
     protected static function statusColor(?string $state): string

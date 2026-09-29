@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use App\Services\Assessments\LevelOneCompletionValidator;
+use App\Services\Fema\FemaLevelOneScreeningRecommendation;
 use Carbon\CarbonInterface;
 use InvalidArgumentException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Validation\ValidationException;
 
 class Assessment extends Model
 {
@@ -19,6 +22,7 @@ class Assessment extends Model
         'assessment_level',
         'fema_version_id',
         'status',
+        'completed_at',
         'remarks',
     ];
 
@@ -27,6 +31,7 @@ class Assessment extends Model
         return [
             'assessment_date' => 'date',
             'assessment_time' => 'datetime:H:i:s',
+            'completed_at' => 'datetime',
         ];
     }
 
@@ -43,6 +48,20 @@ class Assessment extends Model
         static::updating(function (Assessment $assessment): void {
             if ($assessment->isDirty('assessment_number')) {
                 $assessment->assessment_number = $assessment->getOriginal('assessment_number');
+            }
+
+            if ($assessment->getOriginal('status') === 'Completed') {
+                $assessment->preventCompletedAssessmentMutation();
+            }
+
+            if ($assessment->isDirty('status') && $assessment->status === 'Completed') {
+                $assessment->validateLevelOneCompletionForSave();
+                $assessment->persistLevelOneRecommendation();
+                $assessment->completed_at ??= now();
+            }
+
+            if ($assessment->status !== 'Completed') {
+                $assessment->completed_at = null;
             }
         });
     }
@@ -96,6 +115,71 @@ class Assessment extends Model
     protected static function formatAssessmentNumber(int $year, int $sequence): string
     {
         return sprintf('CBEARS-ASMT-%d-%06d', $year, $sequence);
+    }
+
+    public function isCompleted(): bool
+    {
+        return $this->status === 'Completed';
+    }
+
+    public function completeLevelOne(): void
+    {
+        $this->validateLevelOneCompletionForSave();
+        $this->persistLevelOneRecommendation();
+
+        $this->forceFill([
+            'status' => 'Completed',
+            'completed_at' => now(),
+        ])->save();
+    }
+
+    public function levelOneCompletionErrors(): array
+    {
+        return app(LevelOneCompletionValidator::class)->completionErrors($this);
+    }
+
+    public function hasStaleLevelOneScore(): bool
+    {
+        return app(LevelOneCompletionValidator::class)->isScoreStale($this);
+    }
+
+    private function persistLevelOneRecommendation(): void
+    {
+        app(FemaLevelOneScreeningRecommendation::class)->persistForAssessment($this);
+    }
+
+    private function validateLevelOneCompletionForSave(): void
+    {
+        $errors = $this->levelOneCompletionErrors();
+
+        if ($errors !== []) {
+            throw ValidationException::withMessages([
+                'status' => $errors,
+            ]);
+        }
+    }
+
+    private function preventCompletedAssessmentMutation(): void
+    {
+        $lockedFields = [
+            'building_id',
+            'assessment_date',
+            'assessment_time',
+            'assessor_id',
+            'assessment_type',
+            'assessment_level',
+            'fema_version_id',
+            'status',
+            'completed_at',
+        ];
+
+        foreach ($lockedFields as $field) {
+            if ($this->isDirty($field)) {
+                throw ValidationException::withMessages([
+                    $field => 'Completed assessments are locked. Reopening requires a future administrative workflow.',
+                ]);
+            }
+        }
     }
 
     public function building(): BelongsTo
